@@ -1,33 +1,29 @@
-const names = document.getElementById('submit-btn')
-const responseContainer = document.getElementById('response-container')
+const Userbtn = document.getElementById('btn-menu');
+const listSedes = document.getElementById('response-container');
+const listUsers = document.getElementById('search-student');
+const urlC = '../data/cohorts.json';
+const urlP = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+const urlU = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 
-getNames = () => {
-   let requestUsers = new XMLHttpRequest();
-   requestUsers.open('GET', '../data/cohorts/lim-2018-03-pre-core-pw/users.json');
-   requestUsers.onload = addUsers;
-   requestUsers.onerror = handleError;
-   requestUsers.send();
-};
-
-
-const addUsers = (event) => {
-   const data = JSON.parse(event.target.responseText);
-   
-   for (let i=0; i<data.length; i++) {
-       let li = document.createElement('li');
-       li.className = 'articleClass';
-       li.innerText = data[i].name;
-
-       responseContainer.appendChild(li);  
-   }
-
+const getJson = (url,callback) => {
+    const request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = callback;
+    request.onerror = handleError;
+    request.send();
 }
-
-const handleError= () => {
-  console.log('hay un error')
+const handleError = () => {
+    console.log('Se ha presentado un error');
 }
-
-names.addEventListener('click', (e) => {
-   e.preventDefault();
-   getNames();    
-});
+// Progreso de lista de usuarios
+const getProgress = (users, courses) => {
+    let progress = [];
+    getJson(urlP,(err,progressjson) => {
+        for (const key in progressjson) {
+            if (progressjson[key].intro) {
+                progress.push(progressjson);
+            }
+        }
+    });
+    computeUsersStats(users, progress, courses);
+}

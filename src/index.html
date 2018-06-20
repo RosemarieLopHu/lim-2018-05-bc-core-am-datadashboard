@@ -3,21 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title>Data Dashboard</title>
+    <meta name="viewport" content="width-device-width, user-scalable=no, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="masthead">
-        <div class="site-container">
-            <form id="search-form">
-              <label for="search-keyword" class="visuallyhidden">Estudiantes</label>
-              <input id="submit-btn" type="submit"  value="submit">
-            </form>
-        </div>
+    <figure>
+      <img src="../img/map-LaboratoriaSede" alt=""/>
+    </figure>
+  	<header	>
+       <!--Mostrando Sedes en el Menú-->
+      <input type="checkbox" id="btn-menu"/>
+      <label class = "icon-menu" for="btn-menu"></label>
+        <nav class="menu">
+          <div class="style-container">
+            <ul id="response-container">
+              <li><a href="">Sede Lima</a></li>
+              <li><a href="">Sede Mexico</a></li>
+              <li><a href="">Sede Chile</a></li>
+              <li><a href="">Sede Brazil</a></li>
+            </ul>
+          </div>
+        </nav>
+      <div class="wraperLogo">
+        <img src="../img/Laboratoria_CMYK_logo-11.png" id="logo"  alt="">
+      </div>
+      <div class="content-search">
+        <input type="text" id="search-student" placeholder="Buscar"/>
+          <img src="../img/searchicon.png" alt=""/>
+      </div>
+      <div class="user-profile">
+        <img src="../img/logouser.png" id="logo" alt=""/>
+      </div>
     </header>
-    <div class="site-container">
-      <ul id="response-container"></ul>
-    </div>
     <script src="main.js"></script>
-    <script src="data.js"></script>
+    <script	src="data.js"></script>
   </body>
-</html
+</html>
