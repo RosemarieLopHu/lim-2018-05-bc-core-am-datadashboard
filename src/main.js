@@ -1,37 +1,81 @@
-/*creo una funcion que manejara la respueta exitosa
- *una vez envidada la peticion al servidor
- */
+const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+const urlCohorts = '../data/cohorts.json';
+const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 
-function Success () {
-    console.log( 'todo fino' );
-//console.log( this.responseText );
-const data=JSON.parse(this.responseText);
-
-//muestra la lista de cohorts en la consola
-console.log(data);
-
-//muestra la lista de cohorts en el index.html
-var x="";
-for (i = 0; i < data.length; i++) {
-  x += data[i].id + "<br>";
+const getJSON = (url, callback) => {
+  
+  const request = new XMLHttpRequest();
+  request.open('GET', url);
+  request.onload = callback;
+  request.onerror = Error;
+  request.send();
 }
 
-document.getElementById("cohorts").innerHTML = x;
-
+const Error = () => {
+  console.log('A ocurrido un error ??');
 }
 
+const addCohorts = (event) => {
 
-/*Creo una fincion que manejara los errores en caso
-*que hubiere para asi poder identificarlo.
-*/
+  const data = JSON.parse(event.target.responseText);
+  let filtroLima="";
+  let filtroArequipa="";
+  let filtroCdmx="";
+  let filtroScl="";
+  let dataCohort="";
 
-function Errores () {
-console.log( 'A ocurrido un error ??' );
+
+		for (i = 0; i < data.length; i++) {
+		  dataCohort += data[i].id + "<br>";
+		   if (((data[i].id).includes('lim', 0))==true){ //filtra los cohorts que empiezan con lim
+           filtroLima += "<button>" + data[i].id + "</button>"+ "<br>";
+           }
+           if (((data[i].id).includes('aqp', 0))==true){ //filtra los cohorts que empiezan con lim
+           filtroArequipa += "<button>" + data[i].id + "</button>"+ "<br>";
+           }
+           if (((data[i].id).includes('cdmx', 0))==true){ //filtra los cohorts que empiezan con lim
+           filtroCdmx += "<button>" + data[i].id + "</button>"+ "<br>";
+           }
+            if (((data[i].id).includes('scl', 0))==true){ //filtra los cohorts que empiezan con lim
+           filtroScl += "<button>" + data[i].id + "</button>"+ "<br>";
+           }
+	     }
+
+ 
+	 document.getElementById("lima").innerHTML = filtroLima; 
+	 document.getElementById("aqp").innerHTML = filtroArequipa; 
+	 document.getElementById("cdmx").innerHTML = filtroCdmx; 
+	 document.getElementById("scl").innerHTML = filtroScl;
+  }
+ var seleccionarOpcion = function(event) {
+
+  var indiceOpcion = (event.target.selectedIndex);
+  var sede = event.target[indiceOpcion].dataset.sede;
+   
+  getJSON(urlUser,addUser);
+  document.getElementById("sede").innerHTML = sede;
+   
 }
 
-const xhr= new XMLHttpRequest();
-xhr.open('GET', '../data/cohorts.json');
-//xhr.responseType = 'text';
-xhr.onload = Success;
-xhr.onerror = Errores;
-xhr.send();
+const addUser = (event) => { 
+  
+  const data = JSON.parse(event.target.responseText);
+  let nameUsers="";
+  for (i = 0; i < data.length; i++) {
+  nameUsers += data[i].name + "<br>";
+  }
+
+   document.getElementById("nameusers").innerHTML = nameUsers;
+  
+  }; 
+
+ getJSON(urlCohorts, addCohorts);
+
+
+
+
+
+
+
+
+
