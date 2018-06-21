@@ -8,9 +8,10 @@ window.computeUsersStats = (users, progress, courses) => {
          let userWithStats =  {
            //comvertir el objeto a un array, utilizar objet key
            stat : {
-        
             percent: progress[idUsers].intro.percent,
-            ejercicio
+            exercices: progress[idUsers].intro.exercises,
+            reads: progress[idUsers].intro.reads,
+            quizzes:progress[idUsers].intro.quizzes,
            }
          };
          console.log(userWithStats);
@@ -27,3 +28,4 @@ window.filterUsers = (users, search) => {
 
 };
 
+//console.log(Object.values(object1));
