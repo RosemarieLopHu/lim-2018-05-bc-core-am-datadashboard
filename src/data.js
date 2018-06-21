@@ -26,6 +26,19 @@ window.sortUsers = (users, orderBy, orderDirection) => {
 };
 window.filterUsers = (users, search) => {
 
-};
+//const mostrarQuizzesAlumna2 = (id) => {
+  //mostrarQuizzesAlumna((err, data) => {
+    //const scores = [];
+   // Object.keys(data[id]).map((topic) => {
+     // Object.keys(data[id][topic].units).map((leccion) => {
+       // Object.keys(data[id][topic].units[leccion].parts).map((lectura) => {
+          //if (data[id][topic].units[leccion].parts[lectura].hasOwnProperty('score')) {
+           // scores.push(data[id][topic].units[leccion].parts[lectura].score)
+         // }
+       // })
+      //})
+    //});
+   // const promedio = scores.reduce((sum, score) => sum + score, 0) / scores.length
+   // console.log(promedio);
 
 //console.log(Object.values(object1));
