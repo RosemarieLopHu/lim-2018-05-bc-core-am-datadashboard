@@ -1,44 +1,32 @@
 window.computeUsersStats = (users, progress, courses) => {
-// funciones a exportar en el entorno global window
-  const arrayProgress = Object.keys(progress);
-  for (const students of users ){
-    arrayProgress.map((idUsers)=>{
-     if(students.id===idUsers){
-       if(progress[idUsers].intro !== undefined) {
-         let userWithStats =  {
-           //comvertir el objeto a un array, utilizar objet key
-           stat : {
-            percent: progress[idUsers].intro.percent,
-            exercices: progress[idUsers].intro.exercises,
-            reads: progress[idUsers].intro.reads,
-            quizzes:progress[idUsers].intro.quizzes,
-           }
-         };
-         console.log(userWithStats);
-       }
-     }
-    })
-  }
+ let esto = users.map(
+   (user) => {
+     if (Object.keys(progress[user.id]).length ===0) {
+       return user
+     }  
+          user.stats: {
+            percent: percent,
+            exercices: {
+              total: practiceTotal,
+              completed: practiceCompleted,
+              percent: Math.round((practiceCompletes / practiceTotal)*100),
+            },
+            reads: {
+              total: readsTotal,
+              completed:readsCompleted,
+              percent: Math.round((readsCompletes / readsTotal)*100),
+            },
+            quizzes: {
+              total: quizzTotal,
+              completed: quizzCompleted,
+              percent: Math.round((quizzCompleted / quizzTotal)*100),
+              scoreSum: scoreSumQuizz,
+              scoreAvg: Math.round(scoreSumQuizz / quizzCompleted),
+            }
+          }
+          return user;
+        }
+      }
+    )
+  }  
 };
-//Función para ordenar lista de usuarios
-window.sortUsers = (users, orderBy, orderDirection) => {
-
-};
-window.filterUsers = (users, search) => {
-
-//const mostrarQuizzesAlumna2 = (id) => {
-  //mostrarQuizzesAlumna((err, data) => {
-    //const scores = [];
-   // Object.keys(data[id]).map((topic) => {
-     // Object.keys(data[id][topic].units).map((leccion) => {
-       // Object.keys(data[id][topic].units[leccion].parts).map((lectura) => {
-          //if (data[id][topic].units[leccion].parts[lectura].hasOwnProperty('score')) {
-           // scores.push(data[id][topic].units[leccion].parts[lectura].score)
-         // }
-       // })
-      //})
-    //});
-   // const promedio = scores.reduce((sum, score) => sum + score, 0) / scores.length
-   // console.log(promedio);
-
-//console.log(Object.values(object1));

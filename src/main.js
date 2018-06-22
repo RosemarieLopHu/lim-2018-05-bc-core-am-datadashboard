@@ -1,6 +1,5 @@
-const Userbtn = document.getElementById('btn-users');
-//const Userbtn = document.getElementById('btn-menu');
-//const listSedes = document.getElementById('response-container');
+const Userbtn = document.getElementById('btn-menu');
+const listSedes = document.getElementById('response-container');
 //const listUsers = document.getElementById('search-student');
 const urlC = '../data/cohorts.json';
 const urlP = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
@@ -26,4 +25,4 @@ const progresoUsuario = () => {
   }
   getJson(urlP, progress);
 }
-getJson(urlU,(progresoUsuario))
+getJson(urlU,(progresoUsuario));
