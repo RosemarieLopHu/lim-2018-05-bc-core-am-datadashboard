@@ -1,44 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Data Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+  	<header	>
+  		<h1>	proyecto 2 </h1>
+  		
+  	</header>
+  	<h2> Cohorts:</h2>
+         <div>
+           <p id="cohorts"></p>
+         </div>
+ 
+ <select id="filtro" class="students-data" onchange="seleccionarOpcion(event)">
+     <option>Selecciona una opción</option>
+       <option value="lim" data-sede="lim" >Lima</option>
+       <option value="arequipa" data-sede="aqp" >Arequipa</option>
+       <option value="cdmx" data-sede="cdmx" >CDMX</option>
+       <option value="chile" data-sede="scl" >Chile</option>
+   
+    </select>
+    <p id="sede"></p>
+    <p id="lima"></p>
+    <p id="aqp"></p>
+    <p id="cdmx"></p>
+    <p id="scl"></p>
+    
+    <p id="nameusers"></p>
 
-<head>
-  <meta charset="utf-8">
-  <title>Data Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="style.css" />
+ 
 
-</head>
-<body>
-    <header>
-        <!--Mostrando Sedes en el Menú-->
-      <input type="checkbox" id="btn-menu" />
-        <label class="icon-menu" for="btn-menu"></label>
-        <nav class="menu">
-          <div class="style-container">
-            <ul id="response-container">
-              <li>
-                <a href="">Sede Lima</a>
-              </li>
-              <li>
-                <a href="">Sede Mexico</a>
-              </li>
-              <li>
-                <a href="">Sede Chile</a>
-              </li>
-              <li>
-                <a href="">Sede Brazil</a>
-              </li>
-            </ul>
-            <li class="btn4">Estudiantes</li>
-          </div>
-        </nav>
-        <div class="list">
-          <ul id="usersName"></ul>
-        </div>
-</body>
-
-  
-  
+    <script src="main.js"></script>
+    <script	src="data4.js"></script>
+  </body>
 </html>
 
 <!-- <div class="wraperLogo">
