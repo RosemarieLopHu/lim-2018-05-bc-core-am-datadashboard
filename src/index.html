@@ -1,46 +1,69 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-  	<header	>
-  		<h1>	proyecto 2 </h1>
-  		
-  	</header>
-  	<h2> Cohorts:</h2>
-         <div>
-           <p id="cohorts"></p>
-         </div>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Data Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
 
-       <select id="filtro" class="filtro" name="filtro"> 
-          <option value="0">LIMA</option>
-          <option value="1">AREQUIPA</option>
-          <option value="2">CHILE</option>
-          <option value="3">MEXICO</option>
-       </select>
-   
-    
-    <p id="sede"></p>
-    <p id="nameusers"></p>
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="img/logo.png" alt="Laboratoria logo" height="100px">
+    </div>
+  </header>
+  <main class="container">
+    <nav id="barraVertical">
+      <ul class="nav">
+        <li>
+          <a href="">Sede</a>
+          <ul id="selectSede">
+            <li><a id="lim" href="">Lima</a></li>
+            <li><a id="cdmx" href="">México</a></li>
+            <li><a id="gdl" href="">Guadalajara</a></li>
+            <li><a id="scl" href="">Santiago de Chile</a></li>
+            <li><a id="spl" href="">Sao Paulo</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section id="mostrar">
+      <form>
+        <select id="programas">
+          <option value="1">--Selecciona un programa--</option>
+          <option value="pre">Selección</option>
+          <option value="bc">Bootcamp</option>
+          <option value="ec">Educación Continua</option>
+          
+        </select>
+        <select id="generacion">
+          <option value="1">--Selecciona una generacion--</option>
+        </select>
+        <label>Buscar</label>
+        <input type="text" name="" id="">
+      </form>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Progreso</th>
+              <th>Exercicios</th>
+              <th>Lecturas</th>
+              <th>Quiz</th>
+            </tr>
+          </thead>
+          <tbody id="user-container">
 
- 
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <script src="main.js"></script>
-    <script	src="data4.js"></script>
-  </body>
+  </main>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>
-
-<!-- <div class="wraperLogo">
-  <img src="../img/Laboratoria_CMYK_logo-11.png" alt="">
-</div>
-<div class="content-search">
-  <input type="text" id="search-student" placeholder="Buscar" />
-  <img src="../img/searchicon.png" alt="" />
-</div>
-<div class="user-profile">
-  <img src="../img/logouser.png" alt="" />
-</div>
-</header> -->
