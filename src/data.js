@@ -1,33 +1,46 @@
 window.computeUsersStats = (users, progress,courses) => {
-  const usersWithStats = users.map(user => {
-    const percentProgress = () => {
-      const percent = [];
-      Object.keys(progress[user.id]).map(course => {
-        if (progress[user.id][course].hasOwnProperty('percent')) {
-          percent.push(progress[user.id][course].percent);
-        }
-      });
-      if (percent[0] === undefined) {
-        return percent[0] = 0;
-      } else {
-        return percent[0];
+  const userWithStats = users.map(user=>{ 
+     //recorriendo base de datos de usuario con el metodo map
+    const usersId = user.id;  //creamos una const para obtener los id de los usuario
+    const arrUsers = Object.keys ( progress[usersId]);// crear array para obtener traer los datos de usuario como objecto
+  
+    percent=_=> {
+      let percent = 0; // declarando var porcentaje
+      percent=progress.map(avance=>{return progress[usersId][avance].percent;}) // mapeando el porcentaje de usarios a traves de una funcion anonima(noes ncesario q todo tnga nombre) q es avance
+      return percent
       }
-    }
-    const exercisesTotal = () => {
-      const total = [];
-      Object.keys(progress[user.id]).map(course => {
-        Object.keys(progress[user.id][course].units).map(leccion => {
-          Object.keys(progress[user.id][course].units[leccion].parts).map(lectura => {
-            if (progress[user.id][course].units[leccion].parts[lectura].hasOwnProperty('exercises')) {
-              total.push(Object.values(progress[user.id][course].units[leccion].parts[lectura].exercises).length);
-            }
-          })
-        })
+    })
+  };  
+  
+  
+  
+/*stat {
+  percent:funcion
+  exercises: null,
+  quizz:null,
+  reads:null,
+}
+
+}*/
+
+
+
+
+
+/*const userContainerElem = document.getElementById('user-container')
+let cohorData= {
+
+}
+  const userWithStats = cohorData.users.map(function(obj) {
+
+    if(progress[idUsers].hasOwnProperty('intro') !== undefined) {
+     const completedExercises = (progress[idUsers]['intro']['units']['02-variables-and-data-types']['exercises'])
+     const userResult = {name:obj.name, stats:{exercises:completedExercises}}
+      const liElem =document.createElement('li')
+      liElem.innerHTML = `${userResult.name} (ejercicios completados: ${userResult.stats.exercises})`;
+      responseContainerElem.appendChild(liElem)
+       };
       });
-      if (total[0] === undefined) {
-        return total[0] = 0;
-      } else {
-        return total[0];
-      }
-    }
-    
+      console.log(userWithStats);*/
+
+

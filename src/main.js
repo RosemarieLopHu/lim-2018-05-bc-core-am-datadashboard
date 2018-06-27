@@ -1,49 +1,109 @@
-let sedeSelect = document.getElementById('selectSede');
-let programas = document.getElementById('programas');
-const generacion = document.getElementById('generacion');
-const tblBody = document.getElementById('user-container');
+ // Declaro las varibles con los urls
+ const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+ const urlCohorts = '../data/cohorts.json';
+ const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 
-//obteniendo data de cohorts
-const Cohorts = `../data/cohorts.json`;
+ // Funcion para hacer la petición  
+ const getJSON = (url, callback) => {
+   const request = new XMLHttpRequest();
+   request.open('GET', url);
+   request.onload = callback;
+   request.onerror = Error;
+   request.send();
+ }
+ const Error = () => {
+   console.log('A ocurrido un error ??');
+ }
 
-function getCohorts(callback) {
-  const xhrCohorts = new XMLHttpRequest();
-  xhrCohorts.open('GET', Cohorts);
-  xhrCohorts.onload = callback;
-  xhrCohorts.onerror = handleError;
-  xhrCohorts.send();
-}
-function addUser(users, progress) {
-  getCohorts(() => {
-    const dataCohorts = JSON.parse(event.target.responseText);
-    const courses = [];
-   for (cohort of dataCohorts){
-      if (cohort.hasOwnProperty('coursesIndex')) {
-        if (cohort.id === generacion.value) {
-           courses.push(Object.keys(cohort.coursesIndex).toString())
-        }
-      }
+ const usuario = (event) => {
+   const users = JSON.parse(event.target.responseText);
+   const cohorts = (event) => {
+     const cohorts =JSON.parse(event.target.responseText);
+     /*const courses= ['intro'];*/
+     const progress = () => {
+       const progress = JSON.parse(event.target.responseText);
+      /*  let data = computeUsersStats(users, cohorts, progress);
+       data.map(cohort => {
+         if ((cohort.id).includes('lim',0)=== true){
+           tablaBody.innerHTML +='<select>' + cohort.id + '</select>'
+         }
+       }); */
+     }
+     getJSON(urlProgress, progress)
+   }
+   getJSON(urlCohorts, cohorts)
+ }
+ getJSON(urlUser, usuario)
+
+window.addEventListener('load', function() {
+ //Esuchando el evento del select cuando cambia de sede
+ filtro.addEventListener('change', function(event) {
+       switch (event.target.value) {
+         case '0': getJSON(urlCohorts, addCohortslima);
+          break;
+         case '1':getJSON(urlCohorts, addCohortsaqp);
+          break;
+         case '2':getJSON(urlCohorts, addCohortsscl );
+          break;
+          case '3':getJSON(urlCohorts, addCohortscdmx);
+     }
+ });
+ // Funcion que me carga los cohorts de lima
+ const addCohortslima = (event) => {
+   let filtroLima="";
+   const data = JSON.parse(event.target.responseText);
+     for (i = 0; i < data.length; i++) {
+       console.log(data[i].id);
+       //filtra los cohorts que empiezan con lim
+        if (((data[i].id).includes('lim', 0)) === true){ 
+             filtroLima += "<li>" + data[i].id + "</li>" + "<br>";
+            }
+           }
+     document.getElementById("sede").innerHTML = filtroLima;
+   }
+    // Funcion que me carga los cohorts de arequipa
+  const addCohortsaqp = (event) => {
+     let filtroArequipa="";
+     const data = JSON.parse(event.target.responseText);
+       for (i = 0; i < data.length; i++) {
+              if (((data[i].id).includes('aqp', 0))===true){ 
+              filtroArequipa += "<li>" + data[i].id + "</li>"+ "<br>";
+              } 
+         }
+     document.getElementById("sede").innerHTML = filtroArequipa;
    }
 
+   // Funcion que carga los cohorts de mexico
+   const addCohortscdmx = (event) => {
+     const data = JSON.parse(event.target.responseText);
+     let filtroCdmx="";
+       for (i = 0; i < data.length; i++) {
+              if (((data[i].id).includes('cdmx', 0))==true){ 
+              filtroCdmx += "<li>" + data[i].id + "</li>"+ "<br>";
+              }
+           }
+      document.getElementById("sede").innerHTML = filtroCdmx; 
+   }
+ 
+   // Funcion que cargar los cohorts de chile
+   const addCohortsscl = (event) => {
+     const data = JSON.parse(event.target.responseText);
+     let filtroScl="";
+       for (i = 0; i < data.length; i++) {
+       if (((data[i].id).includes('scl', 0))==true){ 
+             //filtra los cohorts que empiezan con lim
+              filtroScl += "<li>" + data[i].id + "</li>"+ "<br>";
+             }
+          }
+      document.getElementById("sede").innerHTML = filtroScl;
+   }
+});
 
-function getUsers() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `../data/cohorts/lim-2018-03-pre-core-pw/users.json`);
-  xhr.onload = function () {
-    const users = JSON.parse(event.currentTarget.responseText);
-    const xhrCohorts = new XMLHttpRequest();
-    xhrCohorts.open('GET', `../data/cohorts/lim-2018-03-pre-core-pw/progress.json`);
-    xhrCohorts.onload = function () {
-      const progress = JSON.parse(event.currentTarget.responseText);
-      addUser(users, progress)
-    }
-    xhrCohorts.onerror = handleError;
-    xhrCohorts.send();
-  };
-  xhr.onerror = handleError;
-  xhr.send();
-}
-function handleError() {
-  console.log('Se ha presentado un error');
-}
+
+
+ 
+
+ 
+
+
 
