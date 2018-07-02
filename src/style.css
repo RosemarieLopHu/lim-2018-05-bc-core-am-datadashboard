@@ -1,0 +1,64 @@
+body,select,option {
+    font-family: "Open Sans" !important;
+  }
+  header {
+    margin-bottom: 20px;
+    border: #555;
+    width: 100%;
+  }
+  
+.logo{
+    background-color: white;
+    text-align: center;
+    display: center;
+}
+body {
+  background-color: #fff;
+  color: #555;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+}
+/* form{
+    display: flex;
+    float: left;
+} */
+/* input{
+    border-radius: 5p,x;
+    padding: 5px 10px;
+    background: #fff;
+    
+} */
+#searhStudent {
+    padding: 0em;
+
+}
+#buscar-estudiantes{
+    background-color: #ffc107;
+    font-family: 'Bitter' serif;
+    font-size: 1em;
+    box-sizing: border-box;
+    width: 250px;
+    height: 655px;
+    padding: 0em 2em 0em 2em;
+    margin: 0;
+    display: inline;
+    float: left;  
+}
+
+p {
+    text-align:center;
+}
+
+ #sede {
+    background-color:white;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0em 0em 0em 2em;
+    box-sizing: border-box;
+    display: inline;
+    width: calc(100% - 250px);
+    height: 55px;
+    float: right;
+}

@@ -4,8 +4,16 @@ window.computeUsersStats = (users, progress, courses) => {
   const usersWithStats = users.map(function (user) {
     if (progress[user.id].hasOwnProperty('intro')) {
       const userUnits = progress[user.id].intro.units;
+      // se inicializa en cero para luego hacer un contador
       let totalExcercises = 0;
       let completedExercises = 0;
+      let totalReads = 0;
+      let completedReads = 0;
+      let totalQuizzes = 0;
+      let completedQuizzes = 0;
+      let scoreSum = 0;
+      let scoreAvg = 0;
+      // Iteración de las unidades
       Object.keys(userUnits).forEach((unitName) => {
         const parts = userUnits[unitName].parts
         Object.keys(parts).forEach((partName) => {
@@ -18,56 +26,70 @@ window.computeUsersStats = (users, progress, courses) => {
               completedExercises += excercise.completed;
             })
           }
+          if (part.hasOwnProperty('type')) {
+            if (part.type === 'read') {  // comprobamos las lecturas completadas
+              totalReads += 1;
+              completedReads += part.completed
+            }
+            if (part.type === 'quiz') {
+              totalQuizzes += 1;
+              completedQuizzes += part.completed;
+              scoreSum += part.score;
+              scoreAvg = scoreSum / completedQuizzes //sacando e promedio
+            }
+          }
         })
       })
       const percentCompleted = (completedExercises / totalExcercises) * 100
+      const percentReads = (completedReads / totalReads) * 100
+      const percentQuizzes = (completedQuizzes / totalQuizzes) * 100
+
       console.log(user.id, 'Percent completeted', percentCompleted)
+      console.log(percent)
+      console.log(totalQuizzes)
+      console.log(completedQuizzes)
+      console.log(scoreSum)
+      console.log(scoreAvg)
     }
-  if (part.type === 'read') {   // lecturas
-    lectures++;
-  }
-  if (part.type === 'read' && part.completed === 1) { // part.type === reads y part.completed es =1, xq incrementa el contador de lecturas que deben estar completadas. recordar part.type esta en el json
-    lecturesCompleted++;
+  });
+  //console.log(usersWithStats)
+  return usersWithStats;
+}
+//segunda función
+//se ordenara de forma alfabetica los nmbres de las alumnas
+
+window.sortUsers = (users, orderBy, orderDirection) => {
+  if (orderBy === "name") {
+    return users.sort(function (a, b) {
+      if (orderDirection == "ASC") {
+        return a.name.localeCompare(b.name); //aqui comprarmos los nombres de las alumnas
+      } else {
+        return a.name.localeCompare(b.name) * -1; //orden descendente
+      }
+    });
   }
 
-  lecturesPercent = Math.round((lecturesCompleted * 100) / lectures);
-  if (part.type === 'quiz') { // part.type es un quizz aumenta el contador de quizzes 
-    quizzes++;
-  }
-  if (part.type === 'quiz' && part.completed === 1) {
-    quizzesCompleted++;
-    // saca la suma general para luego sacar el promedio
-    scoreSum += part.score;
-  }
-  quizzesPercent = Math.round(quizzesCompleted * 100 * 10 / quizzes) // el math.round redondea decimales y los devuelve enteros           
-  if (part.type === 'practice') {   // aqui declaramos si part.type es = a practice entonces aumenta el contador de exercises  
-    exercises++;
-  }
-});
-
-// sacando el promedio
-scoreAvg = scoreSum / quizzes;  // promedio de puntuaciones en quizzes completados
-users[i].stats = {
-  percent: percentGral,
-  reads: {
-    percent: lecturesPercent,
-    total: lectures,
-    completed: lecturesCompleted
-  },
-  exercises: {
-    percent: exercisesPercent,
-    total: exercises,
-    completed: exercisesCompleted
-  },
-  quizzes: {
-    percent: quizzesPercent,
-    total: quizzes,
-    completed: quizzesCompleted,
-    scoreAvg: scoreAvg,
-    scoreSum: scoreSum
+  if (orderBy === "percent") {
+    return users.sort((a, b) => {
+      if (orderDirection == "ASC") {
+        return a.stats.percent - b.stats.percent;
+      } else {
+        return (a.stats.percent - b.stats.percent) * -1;
+      }
+    });
   }
 };
 
-return usersWithStats; // retornando los resultados
+window.filterUsers = (users, search) => {
+  if (search) {
+    if (users) {
+      search = search.toLowerCase();
+      return users.filter(user => user &&
+        user.name &&
+        user.name.toLowerCase().indexOf(search) >= 0);
+    }
+  }
+  return users;
 };
+
 
