@@ -2,70 +2,91 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Dashboard</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="bootstrap.min.css"/>
   </head>
   <body>
-  	<header	>
-  		<div class="logo">
-          <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="Laboratoria logo" height="100px">
-      </div>
-  	</header>
-  	<h2>Sedes</h2>
-      <div>
-        <p id="cohorts"></p>
-      </div>
-      <select id="filtro" class="filtro" name="filtro"> 
-        <option value="0">LIMA</option>
-        <option value="1">AREQUIPA</option>
-        <option value="2">CHILE</option>
-        <option value="3">MEXICO</option>
-      </select>
-      <ul id="sede"></ul>
-      <select id=""></select>
-     <!--  <ul class="nav">
-        <li>
-          <a id="select" href="">Sede</a>
-          <ul id="selectSede">
-            <li><a id="lim" href="">Lima</a></li>
-            <li><a id="cdmx" href="">México</a></li>
-            <li><a id="gdl" href="">Guadalajara</a></li>
-            <li><a id="scl" href="">Santiago de Chile</a></li>
-            <li><a id="spl" href="">Sao Paulo</a></li>
-          </ul>
-        </li>
-      </ul> -->
-    <!-- </nav>
-    <section id="mostrar">
-      <form>
-        <label>Buscar</label>
-        <input type="text" name="" id="">
-      </form>
-      <div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Progreso</th>
-              <th>Exercicios</th>
-              <th>Lecturas</th>
-              <th>Quiz</th>
-            </tr>
-          </thead>
-          <tbody id="user-container">
+  	<header class="main-header">
+        <!--Logo-->
+        <img src="logo_laboratoria.png" alt="Logo" width=230>
+        <!--Search-->
+        <div class="nav-search">
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+</header>
+  	<div class="filtersede options" id="filtersede">
+   
+       <select id="filtro" class="filtro" name="filtro"> 
+          <option>-- SEDES --</option>
+          <option value="0">LIMA</option>
+          <option value="1">AREQUIPA</option>
+          <option value="2">CHILE</option>
+          <option value="3">MEXICO</option>
+       </select>
 
-          </tbody>
-        </table>
-      </div>
-    </section>
- -->
-  </main>
-  <script src="main.js"></script>
-  <script src="data.js"></script>
+     <select class ="options" id="selectCohort" name="selectCohort">
+        <option>-- COHORTS --</option>
+    </select>
+
+      <select id="orderby" class="orderby options"> 
+          <option>-- ORDER BY --</option>
+          <option value="0">Name</option>
+          <option value="1">Exercises Total</option>
+          <option value="2">Completed</option>
+          <option value="3">Percent</option>
+       </select>
+
+        <select id="direction" class="direction"> 
+          <option>-- DIRECTION --</option>
+          <option value="0">Ascendent</option>
+          <option value="1">Descendent</option>
+        </select>
+    
+
+    </div>
   
-</body>
+   
+    
+ <div class="container" id="ocult">
+      <div class="row">
+        <div class="col-md-12">
+          <table class=" table table-hover">
+            <thead class="thead-dark">
+              <tr class="otac">
+                <th class="col-md-1">Name</th>
+                <th class="col-md-1">General Percent</th>
+                <th class="col-md-1 secundary">Exercises Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+                <th class="col-md-1 secundary">Reads Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+                <th class="col-md-1 secundary">Quizzes Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+              </tr>
+            </thead>          
+          </table>
+        </div>
+        <div class="col-md-12">
+            <table class=" table table-hover">
+              <tbody id="datos">
+              </tbody>
+            </table>
+        </div>    
+      </div>
+</div>
 
+    <p id="nodata"></p>
+
+  
+    <script src="main.js"></script>
+    <script	src="data.js"></script>
+
+  </body>
 </html>
