@@ -1,95 +1,139 @@
-window.computeUsersStats = (users, progress, courses) => {
-  // primera función: crea la lista de usuarios, los recorre y caldula los valores de progreso de cada uno, 
-  // esta función devuelve un nuevo arreglo de usuarios donde a cada objeto de los mismos se le agrega la propiedad stats, con estadisticas calculadas.
-  const usersWithStats = users.map(function (user) {
-    if (progress[user.id].hasOwnProperty('intro')) {
-      const userUnits = progress[user.id].intro.units;
-      // se inicializa en cero para luego hacer un contador
-      let totalExcercises = 0;
-      let completedExercises = 0;
-      let totalReads = 0;
-      let completedReads = 0;
-      let totalQuizzes = 0;
-      let completedQuizzes = 0;
-      let scoreSum = 0;
-      let scoreAvg = 0;
-      // Iteración de las unidades
-      Object.keys(userUnits).forEach((unitName) => {
-        const parts = userUnits[unitName].parts
-        Object.keys(parts).forEach((partName) => {
-          const part = parts[partName];
-          if (part.hasOwnProperty('exercises')) {
-            const exercises = part.exercises;
-            Object.keys(exercises).forEach((exerciseName) => {
-              const excercise = exercises[exerciseName]
-              totalExcercises += 1;
-              completedExercises += excercise.completed;
-            })
-          }
-          if (part.hasOwnProperty('type')) {
-            if (part.type === 'read') {  // comprobamos las lecturas completadas
-              totalReads += 1;
-              completedReads += part.completed
-            }
-            if (part.type === 'quiz') {
-              totalQuizzes += 1;
-              completedQuizzes += part.completed;
-              scoreSum += part.score;
-              scoreAvg = scoreSum / completedQuizzes //sacando e promedio
-            }
-          }
-        })
-      })
-      const percentCompleted = (completedExercises / totalExcercises) * 100
-      const percentReads = (completedReads / totalReads) * 100
-      const percentQuizzes = (completedQuizzes / totalQuizzes) * 100
+window.computeUsersStats = (users, progress,courses) => {
+  for (let i = 0; i < users.length; i++) {
+   let userId = users[i].id;
+   let userProgress = progress[userId];
+   if (JSON.stringify(userProgress) === '{}') {
+     users[i].stats = {
+       percent: 0,
+       exercises: { total: 0 , completed: 0, percent: 0, },
+       reads: { total:0, completed:0, percent: 0, },
+       quizzes: { total:0, completed:0, percent: 0, scoreSum:0, acoreAvg: 0 }
+       
+     };
+   } else {
+     // inicio contador 
+     let percentGral = 0;
+     let lectures = 0;
+     let lecturesCompleted = 0;
+     let lecturesPercent = 0;
+     let quizzes = 0;
+     let quizzesCompleted = 0;
+     let quizzesPercent = 0;
+     let exercises = 0;
+     let exercisesCompleted = 0;
+     let exercisesPercent = 0;
+     let scoreSum = 0;
+     let scoreAvg = 0;
 
-      console.log(user.id, 'Percent completeted', percentCompleted)
-      console.log(percent)
-      console.log(totalQuizzes)
-      console.log(completedQuizzes)
-      console.log(scoreSum)
-      console.log(scoreAvg)
-    }
-  });
-  //console.log(usersWithStats)
-  return usersWithStats;
+     // Esto irá recorriendo cada id de curso
+     for (let i in userProgress) { //i en este caso son los cursos que hay dentro del objeto userProgress
+       let element = userProgress[i];
+       if (courses.indexOf(i) < 0) {
+         continue;
+       }
+       percentGral += element.percent / Object.keys(userProgress).length;
+       for (let unit of Object.values(element.units)) { //aca itera por cada unidad de cada curso
+         for (let part of Object.values(unit.parts)) { //aca recorremos cada parte de cada unidad de cada curso, las partes pueden ser lecturas, quizes, exercise, etc
+           //en este caso si la part.length = 0 quiere decir que NO tiene datos en su interior 
+           //asi que para que los contadores no se aumenten, se les da el valor de cero y se define aqui para asegurar que siempre los porcentajes den al menos cero
+
+           if (part.length === 0) {
+             quizzes = 0;
+             exercises = 0;
+             lectures = 0;
+             quizzesCompleted = 0;
+             exercisesCompleted =0;
+             lecturesCompleted = 0;
+             quizzesPercent = 0;
+             exercisesPercent = 0;
+             lecturesPercent = 0;
+
+           }
+         
+           if (part.type === 'read') {
+             lectures++;
+           }
+           if (part.type === 'read' && part.completed === 1) {// si la part.type === reads y completed es =1 entonces se incrementa el contador de lecturas completadas, ya que ademas de tener lecturas deben estar completadas, para entender mejor las parts ver el json de progress
+             lecturesCompleted++;
+           }
+
+           lecturesPercent = Math.round((lecturesCompleted * 100) / lectures);        
+           if (part.type === 'quiz') { //type es la llave que hay en el objeto que estamos recorriendo
+             quizzes++;
+           }
+
+           if (part.type === 'quiz' && part.completed === 1) {
+             quizzesCompleted++;
+             
+             scoreSum += part.score;
+           }
+           quizzesPercent = Math.round((quizzesCompleted * 100 * 10 / quizzes)) / 10;//truco para sacar 1 decimal
+                       
+           if (part.type === 'practice') {
+             exercises++;
+           }
+           if (part.type === 'practice' && part.completed === 1) {
+             exercisesCompleted++;
+           }
+           exercisesPercent = Math.round((exercisesCompleted * 100 * 10) / (exercises || 1)) / 10; 
+           //aca le indicamos que si exercises=0, entonces que lo divida entre 1 para que no de un valor NaN 
+         } //aca termina el for que recorre las parts
+       } //aca termina el for que recorre las unidades
+     }//aca termina el for que recorre los cursos
+     // saca promedio
+     scoreAvg = scoreSum / quizzes;
+
+     users[i].stats = {
+       percent: percentGral,
+       reads: {
+         percent: lecturesPercent,
+         total: lectures,
+         completed: lecturesCompleted
+       },
+       exercises: {
+         percent: exercisesPercent,
+         total: exercises,
+         completed: exercisesCompleted
+       },
+       quizzes: {
+         percent: quizzesPercent,
+         total: quizzes,
+         completed: quizzesCompleted,
+         scoreAvg: scoreAvg,
+         scoreSum: scoreSum
+       }
+     };
+   }
+ }
+ console.log (users) 
+ return users;
+ 
 }
-//segunda función
-//se ordenara de forma alfabetica los nmbres de las alumnas
 
-window.sortUsers = (users, orderBy, orderDirection) => {
-  if (orderBy === "name") {
-    return users.sort(function (a, b) {
-      if (orderDirection == "ASC") {
-        return a.name.localeCompare(b.name); //aqui comprarmos los nombres de las alumnas
-      } else {
-        return a.name.localeCompare(b.name) * -1; //orden descendente
-      }
-    });
-  }
+window.sortUsers=(data, key, orden)=>{
 
-  if (orderBy === "percent") {
-    return users.sort((a, b) => {
-      if (orderDirection == "ASC") {
-        return a.stats.percent - b.stats.percent;
-      } else {
-        return (a.stats.percent - b.stats.percent) * -1;
-      }
-    });
-  }
-};
+return data.sort(function (a, b) {
+        var x = a[key],
+        y = b[key];
 
-window.filterUsers = (users, search) => {
-  if (search) {
-    if (users) {
-      search = search.toLowerCase();
-      return users.filter(user => user &&
-        user.name &&
-        user.name.toLowerCase().indexOf(search) >= 0);
-    }
-  }
-  return users;
-};
+        if (orden === 'asc') {
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+
+        if (orden === 'desc') {
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+});;
+
+switch (orderBy) {
+    case 'name':
+      return usersSortedByName(users);
+    case 'percent':
+      return usersSortedByStatsPercent(users);
+    default:
+      return users;
+   }
+}
+
 
 

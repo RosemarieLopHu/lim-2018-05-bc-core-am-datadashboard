@@ -1,43 +1,92 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Data Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+  </head>
+  <body>
+  	<header class="main-header">
+        <!--Logo-->
+        <img src="logo_laboratoria.png" alt="Logo" width=230>
+        <!--Search-->
+        <div class="nav-search">
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+</header>
+  	<div class="filtersede options" id="filtersede">
+   
+       <select id="filtro" class="filtro" name="filtro"> 
+          <option>-- SEDES --</option>
+          <option value="0">LIMA</option>
+          <option value="1">AREQUIPA</option>
+          <option value="2">CHILE</option>
+          <option value="3">MEXICO</option>
+       </select>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-
-</head>
-
-<body>
-  <header>
-    <div class="logo">
-      <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="Laboratoria logo" class="laboratoria">
-    </div>
-  </header>
-  <section>
-    <p>SEDES</p>
-    <select id="sede" class="filtro" name="filtro">
-      <option value="0">LIMA</option>
-      <option value="1">AREQUIPA</option>
-      <option value="2">CHILE</option>
-      <option value="3">MEXICO</option>
+     <select class ="options" id="selectCohort" name="selectCohort">
+        <option>-- COHORTS --</option>
     </select>
-  </section>
-  <form>
-    <div id="buscar-estudiantes">
-      <input id="searchStudents" onkeyup="onSearchStudents()">
-      <br>
-      <button id="search" onclick="sortName()">BUSCAR</button>
+
+      <select id="orderby" class="orderby options"> 
+          <option>-- ORDER BY --</option>
+          <option value="0">Name</option>
+          <option value="1">Exercises Total</option>
+          <option value="2">Completed</option>
+          <option value="3">Percent</option>
+       </select>
+
+        <select id="direction" class="direction"> 
+          <option>-- DIRECTION --</option>
+          <option value="0">Ascendent</option>
+          <option value="1">Descendent</option>
+        </select>
+    
+
     </div>
-  </form>
-  <div id="studentList"></div>
+  
+   
+    
+ <div class="container" id="ocult">
+      <div class="row">
+        <div class="col-md-12">
+          <table class=" table table-hover">
+            <thead class="thead-dark">
+              <tr class="otac">
+                <th class="col-md-1">Name</th>
+                <th class="col-md-1">General Percent</th>
+                <th class="col-md-1 secundary">Exercises Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+                <th class="col-md-1 secundary">Reads Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+                <th class="col-md-1 secundary">Quizzes Total</th>
+                <th class="col-md-1 secundary">Completed</th>
+                <th class="col-md-1 secundary">Percent</th>
+              </tr>
+            </thead>          
+          </table>
+        </div>
+        <div class="col-md-12">
+            <table class=" table table-hover">
+              <tbody id="datos">
+              </tbody>
+            </table>
+        </div>    
+      </div>
+</div>
 
+    <p id="nodata"></p>
 
-  <script src="data.js"></script>
-  <script src="main.js"></script>
+  
+    <script src="main.js"></script>
+    <script	src="data.js"></script>
 
-
-</body>
-
+  </body>
 </html>
