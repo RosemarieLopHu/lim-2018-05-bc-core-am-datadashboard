@@ -135,5 +135,17 @@ switch (orderBy) {
    }
 }
 
+window.filterUsers = (data, search) => {
+  if(search){
+    if(data){
+      search =search.toLowerCase();
+      return  data.filter(user => user &&
+         user.name &&
+        user.name.toLowerCase().indexOf(search)>= 0);
+    }
+  }
+  return data;
+};
+
 
 
