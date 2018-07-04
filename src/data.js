@@ -1,3 +1,4 @@
+//creando primera funcion 
 window.computeUsersStats = (users, progress,courses) => {
   for (let i = 0; i < users.length; i++) {
    let userId = users[i].id;
@@ -64,16 +65,24 @@ window.computeUsersStats = (users, progress,courses) => {
 
            if (part.type === 'quiz' && part.completed === 1) {
              quizzesCompleted++;
+            
+             scoreSum+= part.score;
              
-             scoreSum += part.score;
            }
-           quizzesPercent = Math.round((quizzesCompleted * 100 * 10 / quizzes)) / 10;//truco para sacar 1 decimal
+           quizzesPercent = Math.round((quizzesCompleted * 100 / quizzes)) ;//truco para sacar 1 decimal
                        
            if (part.type === 'practice') {
-             exercises++;
-           }
-           if (part.type === 'practice' && part.completed === 1) {
-             exercisesCompleted++;
+            if(part.hasOwnProperty('exercises')){
+               const partExercise = Object.keys(part.exercises)
+               exercises = partExercise.length;
+
+               const exerciseCompleted = Object.values(part.exercises)
+               exerciseCompleted.map(exercise => {
+                 exercisesCompleted += exercise.completed;
+                 //console.log(exercise.completed);
+               })
+            }
+            
            }
            exercisesPercent = Math.round((exercisesCompleted * 100 * 10) / (exercises || 1)) / 10; 
            //aca le indicamos que si exercises=0, entonces que lo divida entre 1 para que no de un valor NaN 
@@ -81,7 +90,7 @@ window.computeUsersStats = (users, progress,courses) => {
        } //aca termina el for que recorre las unidades
      }//aca termina el for que recorre los cursos
      // saca promedio
-     scoreAvg = scoreSum / quizzes;
+     scoreAvg = Math.round(scoreSum / quizzesCompleted);
 
      users[i].stats = {
        percent: percentGral,
@@ -105,7 +114,7 @@ window.computeUsersStats = (users, progress,courses) => {
      };
    }
  }
- console.log (users) 
+
  return users;
  
 }
@@ -125,14 +134,14 @@ return data.sort(function (a, b) {
         }
 });;
 
-switch (orderBy) {
+/*switch (orderBy) {
     case 'name':
       return usersSortedByName(users);
     case 'percent':
       return usersSortedByStatsPercent(users);
     default:
       return users;
-   }
+}*/
 }
 
 window.filterUsers = (data, search) => {
@@ -146,6 +155,8 @@ window.filterUsers = (data, search) => {
   }
   return data;
 };
+
+
 
 
 

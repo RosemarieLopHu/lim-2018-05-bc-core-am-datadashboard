@@ -1,8 +1,19 @@
-// Declaro las varibles con los urls
-const urlUser = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const urlCohorts = '../data/cohorts.json';
-const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
-// Funcion para hacer la petición  
+//declaro las constantes con su valor que en este caso son las url de los JSON que estan en el servidor 
+const urlUsers = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'; // data tipo array
+const urlCohorts = '../data/cohorts.json';//data tipo array
+const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';//data tipo objeto
+
+// Seleccionando los elementos del DOM
+const selectSede = document.getElementById('filtersedes');
+const selectCohortLim = document.getElementById('selectCohorts');
+const selectCohortArq = document.getElementById('selectCohorts');
+const selectCohortSch = document.getElementById('selectCohorts');
+const selectCohortCdmx =document.getElementById('selectCohorts');
+const selectCohortGdl =document.getElementById('selectCohorts');
+const selectCohorts= document.getElementById('selectCohorts'); 
+const contentDivStudents = document.getElementById('contenedor')
+
+// Funcion para hacer la petición al servidor usando XHR  
 const getJSON = (url, callback) => {
   const request = new XMLHttpRequest();
   request.open('GET', url);
@@ -10,150 +21,153 @@ const getJSON = (url, callback) => {
   request.onerror = Error;
   request.send();
 }
+//creo funcion error para que me alerte en caso de que haya un error
 const Error = () => {
-  console.log('A ocurrido un error ??');
+  console.log('ha ocurrido un error');
 }
-const addUserProgress = () => {
- 
- const courses = ["intro"] 
-  const users = JSON.parse(event.target.responseText);  
 
- const progress = () => {
-   const progress = JSON.parse(event.target.responseText);
-   const usersWithStats= computeUsersStats(users, progress, courses);
-   var sel = document.getElementById('selectCohort');
-   sel.addEventListener('change', () => {
-
-    if ( sel.value=='lim-2018-03-pre-core-pw') {
-   showusers(usersWithStats);
-   } else {
-   document.getElementById('nodata').innerHTML = 'Disculpe no manejamos esa data por los momentos';  
-   
-   }
-   });
-
-   var selectorderby = document.getElementById('orderby');
-   var selectdirection = document.getElementById('direction');
-   selectorderby.addEventListener('change', () => {
-     selectdirection.addEventListener('change', () => {
-
-   if ( selectorderby.value=='name') {
-      if (selectdirection.value=='ascendent'){
-         let sortbyname=sortUsers(usersWithStats,'name','asc');
-          showusers(sortbyname);
-      }else{
-         let sortbyname=sortUsers(usersWithStats,'name','desc');
-         showusers(sortbyname);
-      }
-   }else{
-     showusers(usersWithStats);
-   }
-
-      });
-   });
-
-console.log(sortUsers(usersWithStats,usersWithStats.name));
- 
- }    
-
- getJSON(urlProgress, progress);
- getJSON(urlCohorts, courses);  
+//creando funcion que me ayuda a cargar los cohorts de lima 
+const addCohortsLima = (event)=>{
+  let filterLima= '';
+  const data = JSON.parse(event.target.responseText);
+  for( i= 0; i<data.length; i++) {
+    //filtrando los cohorts que empiezan con lim
+    if(((data[i].id).includes('lim' , 0)=== true)) {
+      filterLima+= '<option>' + data[i].id + '</option>' + '<br>'
+    }  
+  }
+  selectCohorts.innerHTML=filterLima
 }
-getJSON(urlUser, addUserProgress);
 
-const showusers=(users)=>{
-   let data= users;
-      document.getElementById('ocult').style.display = 'block';
-      document.getElementById('nodata').style.display = 'none';
-      var datos = document.querySelector('#datos');
-      datos.innerHTML = '';
-    for(i = 0; i < data.length; i++) {
-       let TodoUser = (data[i]);
-       datos.innerHTML +=`
-           <tr class="row col-md-12 t-a-c" >
-               <th class="col-md-2 ln-correct-50">${TodoUser.name}</th>
-               <td class="col-md-1 ln-correct-50">${TodoUser.stats.percent + " % "}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.exercises.total}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.exercises.completed}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.exercises.percent + " % "}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.reads.total}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.reads.completed}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.reads.percent + " % "}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.quizzes.total}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.quizzes.completed}</td>
-               <td class="col-md-1 secundary">${TodoUser.stats.quizzes.percent + " % "}</td>
-           </tr>
-        `;
+//creando funcion que me ayuda a cargar los cohorts de Areq 
+const addCohortsAqp = (event)=>{
+  let filterAreq= '';
+  const data = JSON.parse(event.target.responseText);
 
-   }
+  for( i= 0; i<data.length; i++) {
+    //filtrando los cohorts que empiezan con aqp
+    if(((data[i].id).includes('aqp' , 0)=== true)) {
+      filterAreq+= '<option>' + data[i].id + '</option>' + '<br>'
+    }  
+  }
+  selectCohorts.innerHTML=filterAreq
+}
+
+//creando funcion que me ayuda a cargar los cohorts de Ciudad de santiagoChile  
+const addCohortsScl  = (event)=>{
+  let filterSch= '';
+  const data = JSON.parse(event.target.responseText);
+
+  for( i= 0; i<data.length; i++) {
+    //filtrando los cohorts que empiezan con cdmx
+    if(((data[i].id).includes('scl' , 0)=== true)) {
+      filterSch+= '<option>' + data[i].id + '</option>' + '<br>'
+    }  
+  }
+  selectCohorts.innerHTML= filterSch
+}
+
+//creando funcion que me ayuda a cargar los cohorts de Ciudad de Mexico  
+const  addCohortsCdmx = (event)=>{
+  let filterCdmx= '';
+  const data = JSON.parse(event.target.responseText);
+
+  for( i= 0; i<data.length; i++) {
+    //filtrando los cohorts que empiezan con cdmx
+    if(((data[i].id).includes('cdmx' , 0)=== true)) {
+      filterCdmx+= '<option>' + data[i].id + '</option>' + '<br>'
+    }  
+  }
+  selectCohorts.innerHTML= filterCdmx
+}
+
+//creando funcion que me ayuda a cargar los cohorts de Ciudad de Guadalajara 
+const  addCohortsGdl = (event)=>{
+  let filterGdl= '';
+  const data = JSON.parse(event.target.responseText);
+
+  for( i= 0; i<data.length; i++) {
+    //filtrando los cohorts que empiezan con guadalajara
+    if(((data[i].id).includes('gdl' , 0)=== true)) {
+      filterGdl+= '<option>' + data[i].id + '</option>' + '<br>'
+    }  
+  }
+  selectCohorts.innerHTML= filterGdl
+}
+
+
+const show = (usersWithStats)=>{
+  console.log(usersWithStats);
+  
+for (let  i= 0;  i< usersWithStats.length; i++) {
+  contentDivStudents.innerHTML += `<div>${usersWithStats[i].name +':' + usersWithStats[i].stats.percent + ':' + usersWithStats[i].stats.quizzes.percent}</div>`
+  
   
 }
+  
+}
+// crendo funcion que relaciona usuarios con progreso
+const addUserProgress = () => {
+  const courses = ['intro']
+  const users = JSON.parse(event.target.responseText);
+  //console.log(users);
+  const progress = () => {
+    const progress= JSON.parse(event.target.responseText);
 
+    const usersWithStats = computeUsersStats(users,progress,courses);
+    //console.log(usersWithStats);
+    show(usersWithStats)
+    
+/*     select.addEventListener('change', (e)=>{
+    // console.log(e.target.value);
+    
+ }); */
+} 
 
-window.addEventListener('load', function() {
-//Esuchando el evento del select cuando cambia de sede
-filtro.addEventListener('change', function(event) {
-      switch (event.target.value) {
-        case '0': getJSON(urlCohorts, addCohortslima);
+  getJSON(urlProgress, progress);
+  getJSON(urlCohorts, courses);
+}
+
+selectCohorts.addEventListener('change', event => {
+    
+  if(selectCohorts.value=='lim-2018-03-pre-core-pw'){
+    // console.log(usersWithStats, selectCohorts.value)
+    getJSON(urlUsers, addUserProgress);
+ 
+   }else {
+ 
+     document.getElementById('nodata').innerHTML='Disculpe no contamos con esta informacion en este momento'
+   } 
+
+  
+})
+//cuando el entorno gloal window cargue llamar a la siguiente funcion
+window.addEventListener('load', () => {
+  //Filtersede espera evento change para ejecutar la funcion que tiene como parametro el evento 
+  selectSede.addEventListener('change' , (event)=>{
+    switch(event.target.value){
+      case '0':getJSON(urlCohorts, addCohortsLima);
          break;
-        case '1':getJSON(urlCohorts, addCohortsaqp);
+      case '1':getJSON(urlCohorts, addCohortsAqp);
          break;
-        case '2':getJSON(urlCohorts, addCohortsscl );
+      case '2':getJSON(urlCohorts, addCohortsScl );
          break;
-         case '3':getJSON(urlCohorts, addCohortscdmx);
-    }
-});
-// Funcion que me carga los cohorts de lima
-const addCohortslima = (event) => {
-  let filtroLima="";
-  const data = JSON.parse(event.target.responseText);
-    for (i = 0; i < data.length; i++) {
-      //console.log(data[i].id);
-      //filtra los cohorts que empiezan con lim
-       if (((data[i].id).includes('lim', 0)) === true){ 
-            filtroLima += "<option>" + data[i].id + "</option>" + "<br>";
-           }
-          }
-    document.getElementById("selectCohort").innerHTML = filtroLima;
+      case '3':getJSON(urlCohorts, addCohortsCdmx);
+         break;
+      case '4':getJSON(urlCohorts, addCohortsGdl);
+    }  
+  });
 
-  }
-   // Funcion que me carga los cohorts de arequipa
- const addCohortsaqp = (event) => {
-    let filtroArequipa="";
-    const data = JSON.parse(event.target.responseText);
-      for (i = 0; i < data.length; i++) {
-             if (((data[i].id).includes('aqp', 0))===true){ 
-             filtroArequipa += "<option>" + data[i].id + "</option>"+ "<br>";
-             } 
-        }
-    document.getElementById("selectCohort").innerHTML = filtroArequipa;
-  }
+ 
 
-  // Funcion que carga los cohorts de mexico
-  const addCohortscdmx = (event) => {
-    const data = JSON.parse(event.target.responseText);
-    let filtroCdmx="";
-      for (i = 0; i < data.length; i++) {
-             if (((data[i].id).includes('cdmx', 0))==true){ 
-             filtroCdmx += "<option>" + data[i].id + "</option>"+ "<br>";
-             }
-          }
-     document.getElementById("selectCohort").innerHTML = filtroCdmx; 
-  }
+})
 
-  // Funcion que cargar los cohorts de chile
-  const addCohortsscl = (event) => {
-    const data = JSON.parse(event.target.responseText);
-    let filtroScl="";
-      for (i = 0; i < data.length; i++) {
-      if (((data[i].id).includes('scl', 0))==true){ 
-            //filtra los cohorts que empiezan con lim
-             filtroScl += "<option>" + data[i].id + "</option>"+ "<br>";
-            }
-         }
-     document.getElementById("selectCohort").innerHTML = filtroScl;
-  }
-});
+
+
+
+
+
+
 
 const addCohorts = (event) => {
   cohorts = JSON.parse(event.target.responseText);
@@ -164,7 +178,25 @@ const addCohorts = (event) => {
   /*       console.log(usersWithStats)*/
 }
 
-// Se declara la función para que ordene a los usuarios
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
 
 function sortName() {
   const direccion = search.innerHTML;

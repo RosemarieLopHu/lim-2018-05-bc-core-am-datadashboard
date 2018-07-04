@@ -1,38 +1,24 @@
-body,select,option {
-    font-family: "Open Sans" !important;
-  }
-  header {
-    margin-bottom: 20px;
-    border: #555;
-    width: 100%;
-  }
-body {
-    background-color: #fff;
-    color: #555;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0;
-  }
-img {
-    background-color: white;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; 
+.logo{
+ position: center;
 }
-.filtro{
-  background-color: #555;
+
+#filtersedes{
+
+background-color:black;
+color: white;
+font-size: 20px;
+border: 1px;
+padding: .8rem .3rem .8rem .5rem;
+border-radius:2px; 
+}
+
+#selectCohorts{
+  background-color:black;
   color: white;
+  font-size: 20px;
+  border: 1px;
+  padding: .8rem .3rem .8rem .5rem;
+  border-radius:2px; 
+
+
 }
-
-#option{
-
-  background-color: #555;
-  color: white;
-}
-
-#sede{
- background-color: black;
- color: white;
-}
-
