@@ -1,92 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="bootstrap.min.css"/>
-  </head>
-  <body>
-  	<header class="main-header">
-        <!--Logo-->
-        <img src="logo_laboratoria.png" alt="Logo" width=230>
-        <!--Search-->
-        <div class="nav-search">
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                </div>
-            </form>
-        </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<header>
+  <div class="logo">
+  <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="" width="300px">
+  <hr>
+  </div>
 </header>
-  	<div class="filtersede options" id="filtersede">
-   
-       <select id="filtro" class="filtro" name="filtro"> 
-          <option>-- SEDES --</option>
-          <option value="0">LIMA</option>
-          <option value="1">AREQUIPA</option>
-          <option value="2">CHILE</option>
-          <option value="3">MEXICO</option>
-       </select>
+<body>
+  <!--filter sites: filtro de sedes-->
+<div class="filter-sites" id="filtersites">
 
-     <select class ="options" id="selectCohort" name="selectCohort">
-        <option>-- COHORTS --</option>
-    </select>
-
-      <select id="orderby" class="orderby options"> 
-          <option>-- ORDER BY --</option>
-          <option value="0">Name</option>
-          <option value="1">Exercises Total</option>
-          <option value="2">Completed</option>
-          <option value="3">Percent</option>
-       </select>
-
-        <select id="direction" class="direction"> 
-          <option>-- DIRECTION --</option>
-          <option value="0">Ascendent</option>
-          <option value="1">Descendent</option>
-        </select>
-    
-
-    </div>
-  
-   
-    
- <div class="container" id="ocult">
-      <div class="row">
-        <div class="col-md-12">
-          <table class=" table table-hover">
-            <thead class="thead-dark">
-              <tr class="otac">
-                <th class="col-md-1">Name</th>
-                <th class="col-md-1">General Percent</th>
-                <th class="col-md-1 secundary">Exercises Total</th>
-                <th class="col-md-1 secundary">Completed</th>
-                <th class="col-md-1 secundary">Percent</th>
-                <th class="col-md-1 secundary">Reads Total</th>
-                <th class="col-md-1 secundary">Completed</th>
-                <th class="col-md-1 secundary">Percent</th>
-                <th class="col-md-1 secundary">Quizzes Total</th>
-                <th class="col-md-1 secundary">Completed</th>
-                <th class="col-md-1 secundary">Percent</th>
-              </tr>
-            </thead>          
-          </table>
-        </div>
-        <div class="col-md-12">
-            <table class=" table table-hover">
-              <tbody id="datos">
-              </tbody>
-            </table>
-        </div>    
-      </div>
+    <select id="filtersedes" class="filter" name="filter"> 
+        <option> Selecciona la Sede </option>
+        <option value="0">Lima</option>
+        <option value="1">Arequipa</option>
+        <option value="2">Chile</option>
+        <option value="3">Mexico</option>
+        <option value="4">Guadalajara</option>
+      </select>
 </div>
 
-    <p id="nodata"></p>
+<div class="filter-cohorts">
+    <select class ="options" id="selectCohorts" name="selectCohort">
+        <option>Selecciona el Cohort</option>
+    </select>
+</div>
+<div id="contenedor">
 
-  
-    <script src="main.js"></script>
-    <script	src="data.js"></script>
-
-  </body>
+</div>
+ 
+<p id="nodata"></p>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
 </html>

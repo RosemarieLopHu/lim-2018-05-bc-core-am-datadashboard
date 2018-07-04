@@ -1,22 +1,24 @@
+.logo{
+ position: center;
+}
 
-.filtro{
-  background-color: black;
+#filtersedes{
+
+background-color:black;
+color: white;
+font-size: 20px;
+border: 1px;
+padding: .8rem .3rem .8rem .5rem;
+border-radius:2px; 
+}
+
+#selectCohorts{
+  background-color:black;
   color: white;
-}
+  font-size: 20px;
+  border: 1px;
+  padding: .8rem .3rem .8rem .5rem;
+  border-radius:2px; 
 
-option{
 
-  background-color: black;
-  color: white;
-}
-
-#sede{
- background-color: black;
- color: white;
-}
-
-section{
-
-  float:right;
-  background-color: darkgrey;
 }
