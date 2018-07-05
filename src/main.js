@@ -11,7 +11,8 @@ const selectCohortSch = document.getElementById('selectCohorts');
 const selectCohortCdmx =document.getElementById('selectCohorts');
 const selectCohortGdl =document.getElementById('selectCohorts');
 const selectCohorts= document.getElementById('selectCohorts'); 
-const contentDivStudents = document.getElementById('contenedor')
+const contentDivStudents = document.getElementById('contenedor');
+const selectorder= document.getElementById('orderby');
 
 // Funcion para hacer la petición al servidor usando XHR  
 const getJSON = (url, callback) => {
@@ -97,32 +98,26 @@ const  addCohortsGdl = (event)=>{
 
 
 const show = (usersWithStats)=>{
-  console.log(usersWithStats);
-  
-for (let  i= 0;  i< usersWithStats.length; i++) {
-  contentDivStudents.innerHTML += `<div>${usersWithStats[i].name +':' + usersWithStats[i].stats.percent + ':' + usersWithStats[i].stats.quizzes.percent}</div>`
-  
-  
+  //console.log(usersWithStats);
+  for (let  i= 0;  i< usersWithStats.length; i++) {
+    contentDivStudents.innerHTML += `<div>${usersWithStats[i].name +':' + usersWithStats[i].stats.percent + ':' + usersWithStats[i].stats.quizzes.percent}</div>` 
+  }
 }
-  
-}
+
 // crendo funcion que relaciona usuarios con progreso
 const addUserProgress = () => {
   const courses = ['intro']
   const users = JSON.parse(event.target.responseText);
-  //console.log(users);
   const progress = () => {
     const progress= JSON.parse(event.target.responseText);
-
     const usersWithStats = computeUsersStats(users,progress,courses);
-    //console.log(usersWithStats);
+    sortUsers(usersWithStats, 'Nombre')
+
+    console.log(sortUsers(usersWithStats, 'Nombre'))
+
     show(usersWithStats)
-    
-/*     select.addEventListener('change', (e)=>{
-    // console.log(e.target.value);
-    
- }); */
-} 
+   
+  } 
 
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
@@ -157,10 +152,8 @@ window.addEventListener('load', () => {
       case '4':getJSON(urlCohorts, addCohortsGdl);
     }  
   });
-
- 
-
 })
+
 
 
 

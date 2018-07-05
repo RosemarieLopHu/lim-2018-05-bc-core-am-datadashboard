@@ -119,30 +119,66 @@ window.computeUsersStats = (users, progress,courses) => {
  
 }
 
-window.sortUsers=(data, key, orden)=>{
 
-return data.sort(function (a, b) {
-        var x = a[key],
-        y = b[key];
+/*
+window.sortUsers=(users, orderBy, orderDirection)=>{
 
-        if (orden === 'asc') {
-            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        }
+  return users.sort((a,b)=>{
 
-        if (orden === 'desc') {
-            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-        }
-});;
+     const ascendente = a[orderBy];
+     const descendente = b[orderBy];
 
-/*switch (orderBy) {
-    case 'name':
-      return usersSortedByName(users);
-    case 'percent':
-      return usersSortedByStatsPercent(users);
-    default:
+     if(orden === 'asc'){
+      return ((ascendente > descendente)? -1: ((ascendente < descendente)? 1 : 0));
+     }
+     if(orden === 'desc'){  
+      return ((ascendente < descendente)? -1: ((ascendente > descendente)? 1 : 0));
+
+     }
+     switch(orderBy){
+
+      case 'name':
+        return (users)
+
+      case 'percent':
+      return usersSortedByStatsPercent(users)
+
+      default:
+
       return users;
+     }
+
+  })
 }*/
+
+// byName, byPercent
+window.sortUsers=(users, orderBy, orderDirection)=>{
+  const orderFactor = (orderDirection === 'DESC' ? -1 : 1);
+  switch(orderBy){
+    case 'name':
+      return users.sort((a, b) => {
+        let result = 0;
+        if (a.name < b.name) {
+          result = 1
+        } else if (a.name < b.name) {
+          result = -1
+        }
+        return result * orderFactor;
+      })
+
+    case 'percent':
+      return users.sort((a, b)=>{
+        let resultPercent= 0
+         if (a.percent < b.percent) {
+           resultPercent = 1
+        } else if (a.percent < b.percent) {
+           resultPercent = -1
+        }
+          return resultPercent * orderFactor;
+    });
+  }
 }
+
 
 
 
