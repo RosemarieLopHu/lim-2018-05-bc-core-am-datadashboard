@@ -5,19 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <title>DataDashboard</title>
 </head>
 <header>
   <div class="logo">
-  <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="" width="300px">
-  <hr>
+    <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="" width="250px">
+    <hr>
+  </div>
+  <!-- Búsqueda -->
+  <div class="nav-search">
+    
   </div>
 </header>
+<hr>
 <body>
-  <!--filter sites: filtro de sedes-->
-<div class="filter-sites" id="filtersites">
-
-    <select id="filtersedes" class="filter" name="filter"> 
+  <nav>
+      <select name="Lista" id="orderBy">
+          <option>-Order by-</option>
+          <option value="name">Nombre</option>
+          <option value="percent">Porcentaje completitud</option>
+          <option value="exercises">Ejercicios Completados</option>
+          <option value="reads">Lecturas</option>
+          <option value="quizz">Quizzes</option>
+          <option value="quizzAvg">Promedio Quizzes</option>
+        </select>
+        <select id="orderDirection" class="Direccion">
+            <option>Direction</option>
+            <option value="ASC">Ascendente</option>
+            <option value="DESC">Descendente</option>
+        </select>
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..."> <!--CREAR UN EVENTE AL BUSCADOR-->
+            </div>
+          </form>
+  </nav>
+  <aside class="barra-vertical">
+    <!--filter sites: filtro de sedes-->
+    <div class="filter-sites" id="filtersites">
+      <select id="filtersedes" class="filter" name="filter">
         <option> Selecciona la Sede </option>
         <option value="0">Lima</option>
         <option value="1">Arequipa</option>
@@ -25,19 +52,33 @@
         <option value="3">Mexico</option>
         <option value="4">Guadalajara</option>
       </select>
-</div>
-
-<div class="filter-cohorts">
-    <select class ="options" id="selectCohorts" name="selectCohort">
+    </div>
+    <!--filter cohorts: filtro de cohorts-->
+    <div class="filter-cohorts">
+      <select class="options" id="selectCohorts" name="selectCohort">
         <option>Selecciona el Cohort</option>
-    </select>
-</div>
-<div id="contenedor">
-
-</div>
- 
-<p id="nodata"></p>
+      </select>
+    </div>
+    </aside>
+<section class="float">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Porcentaje de Completitud</th>
+      <th>Ejercicios</th>
+      <th>Quizzes</th>
+      <th>Lecturas</th>
+      <th>Promedio Quizzes</th>
+    </tr>
+  </thead>
+  <tbody id="contenedor"></tbody>
+</table>
+</section>
+  
+  <p id="nodata"></p>
   <script src="data.js"></script>
   <script src="main.js"></script>
 </body>
+
 </html>
