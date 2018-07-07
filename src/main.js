@@ -1,4 +1,4 @@
-//declaro las constantes con su valor que en este caso son las url de los JSON que estan en el servidor 
+//Declaro las constantes con su valor que en este caso son las url de los JSON que estan en el servidor 
 const urlUsers = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'; // data tipo array
 const urlCohorts = '../data/cohorts.json';//data tipo array
 const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';//data tipo objeto
@@ -57,8 +57,6 @@ const addCohortsAqp = (event) => {
   selectCohorts.innerHTML = filterAreq
 }
 
-
-
 //creando función que me ayuda a cargar los cohorts de Ciudad de santiagoChile  
 const addCohortsScl = (event) => {
   let filterSch = '';
@@ -101,7 +99,6 @@ const addCohortsGdl = (event) => {
   selectCohorts.innerHTML = filterGdl
 }
 //CREANDO UNA  OPCION EN UN SELECT CON UN TEMPLATE
-
 const show = (usersWithStats) => {
    console.log(usersWithStats);
   
@@ -114,10 +111,7 @@ const show = (usersWithStats) => {
         <td>${usersWithStats[i].stats.quizzes.completed}</td> 
         <td>${usersWithStats[i].stats.quizzes.scoreAvg}</td>`
       + `</tr>`;
-
-    //contentDivStudents.innerHTML += `<div>${usersWithStats[i].name +':' + 'percent:' + usersWithStats[i].stats.percent + ':' + 'quizzes' + usersWithStats[i].stats.quizzes.percent + ':'+ 'lecturas' +  usersWithStats[i].stats.reads.completed}</div>`;
   }
-
 }
 // creando función que relaciona usuarios con progreso
 const addUserProgress = () => {
@@ -196,17 +190,3 @@ const addCohorts = (event) => {
   computeUsersStats(users, progress, courses);
   console.log(usersWithStats);
 }
-
-/* function sortName() {
-  const direccion = search.innerHTML;
-  if (direccion == 'ASC') {
-    search.innerText = 'DESC';
-  } else {
-    search.innerText = 'ASC';
-  }
- */
-/* let myFinalList = window.processCohortData(options);
-let studentsOptions = document.getElementById("studentsOptions");
-studentsOptions.innerHTML="";
-studentsOptions.innerHTML="<tr><td>Nombre</td><td>Porcentaje</td><td>Ejercicios</td><td>Quizzes</td><td>Lecturas</td><td>Prom Quiz</td></tr>";
-*/
