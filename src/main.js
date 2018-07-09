@@ -12,10 +12,14 @@ const selectCohortCdmx = document.getElementById('selectCohorts');
 const selectCohortGdl = document.getElementById('selectCohorts');
 const selectCohorts = document.getElementById('selectCohorts');
 const contentDivStudents = document.getElementById('contenedor')
-const stringSearch = document.getElementById('search');
-const selectOrderDirection = document.getElementById('orderDirection');
+const stringSearch = document.getElementById('search-input');
+/*const selectOrderDirection = document.getElementById('orderDirection'); */
 const selectOrderBy = document.getElementById('orderBy');
 /* const ordenar = document.getElementById('ordenar'); */
+/* let users;
+let progress; */
+/* let cohorts;
+let  */
 
 // Funcion para hacer la petición al servidor usando XHR  
 const getJSON = (url, callback) => {
@@ -98,10 +102,10 @@ const addCohortsGdl = (event) => {
   }
   selectCohorts.innerHTML = filterGdl
 }
-//CREANDO UNA  OPCION EN UN SELECT CON UN TEMPLATE
+//CREANDO UNA  OPCION EN UN SELECT CON UN TEMPLATE, VALOR DE RETORNO CON LA PROPIEDAD STATS
 const show = (usersWithStats) => {
-   console.log(usersWithStats);
-  
+  /* console.log(usersWithStats); */
+
   for (let i = 0; i < usersWithStats.length; i++) {
     contentDivStudents.innerHTML += `<tr>` +
       `<td>${usersWithStats[i].name}</td>
@@ -122,30 +126,21 @@ const addUserProgress = () => {
     const progress = JSON.parse(event.target.responseText);
     const usersWithStats = computeUsersStats(users, progress, courses);
     show(usersWithStats)
-    selectOrderDirection.addEventListener('change', (e)=>{
-  
-      console.log(selectOrderDirection.value);
-       
-      console.log( selectOrderBy.value);
-      //console.log(usersWithStats)
-      
-    const nuevoArray = sortUsers(usersWithStats, selectOrderBy.value, selectOrderDirection.value);
-    console.log(nuevoArray);
+
     
-    contentDivStudents.innerHTML = '';
-    show(nuevoArray)
-     
-      
+    /* selectOrderDirection.addEventListener('change', (e) => {
+      console.log(usersWithStats)
+
+      const nuevoArray = sortUsers(usersWithStats, selectOrderBy.value, selectOrderDirection.value);
+      contentDivStudents.innerHTML = '';
+      show(nuevoArray)
     })
+     */  
+
+    
     //console.log(sortUsers(usersWithStats, 'Nombre', 'ASC'))
     //console.log(usersWithStats);
-    
-
-
- /* select.addEventListener('change', (event) =>{
-    console.log(event.target.value);
-    
- });  */}
+  }
 
   getJSON(urlProgress, progress);
   getJSON(urlCohorts, courses);
@@ -156,6 +151,7 @@ selectCohorts.addEventListener('change', event => {
   if (selectCohorts.value == 'lim-2018-03-pre-core-pw') {
     // console.log(usersWithStats, selectCohorts.value)
     getJSON(urlUsers, addUserProgress);
+
 
   } else {
 
@@ -186,7 +182,51 @@ const addCohorts = (event) => {
   cohorts = JSON.parse(event.target.responseText);
   const listCohort = cohorts.find(cohort => cohort.id === 'lim-2018-03-pre-core-pw'); //se busca el cohort con ese id
   courses = Object.keys(listCohort.coursesIndex);
-
   computeUsersStats(users, progress, courses);
-  console.log(usersWithStats);
-}
+
+  const options = {
+    cohort : currentCohort,
+    cohortData : {users, progress},
+    orderBy: '',
+    orderDirection: '',
+    search: '',
+  }
+  const newUser = processCohortData(options)
+  showData(newUser);
+
+  
+
+
+//buscador de alumnas
+searchInput.addEventListener('input', () => {
+  let search = searchInput.value;
+
+  const options = {
+    cohort : currentCohort,
+    cohortData : {users, progress},
+    orderBy: '',
+    orderDirection: '',
+    search: '',
+  }
+
+  options.search = search;
+  const searching = processCohortData(options);
+  responseContainerEl.innerHTML = '';
+  showData(searching);
+});
+//selector de ordenado ascedente y descendente
+orderSelect.addEventListener('change', (e) => {  
+ const orderValue = orderSelect.options[orderSelect.selectedIndex].value;
+  const orderArr = orderValue.split('|')
+  const options = {
+    cohort : currentCohort,
+    cohortData : {users, progress},
+    orderBy: orderArr[0],
+    orderDirection: orderArr[1],
+    search: '',
+ }
+ const newUser = processCohortData(options)
+showData(newUser);
+});
+
+};

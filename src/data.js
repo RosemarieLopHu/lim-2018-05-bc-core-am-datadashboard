@@ -129,13 +129,15 @@ window.computeUsersStats = (users, progress, courses) => {
   }
 
   return users;
-  console.log(users)
+/*   console.log(users)
+ */
 }
+
 // funcion ordena la lista de usuarios creada con computeUsersStats en base a orderBy y OrderDirection
 window.sortUsers = (users, orderBy, orderDirection) => {
-console.log(users);
+/* console.log(users); */
 
-  const listOrder = users;
+  let listOrder = users;
 
   if (orderBy === "name" && orderDirection === 'ASC') {
     return listOrder.sort(function (a, b) {
@@ -215,6 +217,7 @@ console.log(users);
     ListOrder.sort(function (a, b) {
       return b.stats.reads.completed - a.stats.reads.completed;
     });
+  return ListOrder
   }
 /*   if (orderDirection === "ASC") {
     ListOrder = ListOrder.reverse();
@@ -222,31 +225,24 @@ console.log(users);
 
   return ListOrder; */ //arreglo de usuarios ordenados
 }
+//Buscador de estudiantes
 
-
-
+const filterUsers = (users, search) => {
+  let ListFilter = users.filter(user => (user.name.toUpperCase()).indexOf(search.toUpperCase()) !== -1);
+  return ListFilter;//lista de usuarios con coincidencia en search
+}
+//Cuarta f(x): Esta función invoca internamente a computer, sort & filterUsers
 const processCohortData = (options) => {
-  /* let users = options.cohortData.users;
+  let users = options.cohortData.users;
   // let cohort = options.cohort;
   let progress = options.cohortData.progress;
   let orderBy = options.orderBy;
   let orderDirection = options.orderDirection;
   let search = options.search;
-  let courses = options.cohort.coursesIndex;
- */
+  let courses = options.cohortData.coursesIndex;
   // console.log(courses);
-  /* let usersFiltered = filterUsers(users, search);
+  let usersFilter = filterUsers(users, search);
   let usersWithStats = computeUsersStats(usersFiltered, progress, courses);
-  let ListOrderFiltered = sortUsers(usersWithStatus, orderBy, orderDirection);
-  return ListOrderFiltered;
-} */
-
-/* window.filterUsers = filterUsers;
-window.computeUsersStats = computeUsersStats;
-window.sortUsers = sortUsers;
-window.processCohortData = processCohortData; */
+  let ListOrderFilter = sortUsers(usersWithStats, orderBy, orderDirection);
+  return ListOrderFilter;
 }
- 
-
-
-
