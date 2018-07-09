@@ -45,11 +45,14 @@ border-radius:2px;
   border-radius:2px; 
 
 }
-.float {
+/* .float {
   float: right;
   margin-right: 15%;
 }
 .float {
   float: right;
   margin-right: 15%;
+} */
+.table-responsive{
+  overflow-y: hidden;
 }
