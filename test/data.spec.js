@@ -74,7 +74,7 @@ describe('data', () => {
     });
 
   });
-
+/* 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
     
 
@@ -104,5 +104,5 @@ describe('data', () => {
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
 
   });
-
+ */
 });

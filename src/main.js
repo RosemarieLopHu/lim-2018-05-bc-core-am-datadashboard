@@ -15,7 +15,6 @@ const contentDivStudents = document.getElementById('contenedor')
 const stringSearch = document.getElementById('search');
 const selectOrderDirection = document.getElementById('orderDirection');
 const selectOrderBy = document.getElementById('orderBy');
-/* const ordenar = document.getElementById('ordenar'); */
 
 // Funcion para hacer la petición al servidor usando XHR  
 const getJSON = (url, callback) => {
@@ -98,70 +97,6 @@ const addCohortsGdl = (event) => {
   }
   selectCohorts.innerHTML = filterGdl
 }
-//CREANDO UNA  OPCION EN UN SELECT CON UN TEMPLATE
-const show = (usersWithStats) => {
-   console.log(usersWithStats);
-  
-  for (let i = 0; i < usersWithStats.length; i++) {
-    contentDivStudents.innerHTML += `<tr>` +
-      `<td>${usersWithStats[i].name}</td>
-        <td>${usersWithStats[i].stats.percent}</td>               
-        <td>${usersWithStats[i].stats.exercises.completed + ' de ' + usersWithStats[i].stats.exercises.total}</td>
-        <td>${usersWithStats[i].stats.reads.completed}</td> 
-        <td>${usersWithStats[i].stats.quizzes.completed}</td> 
-        <td>${usersWithStats[i].stats.quizzes.scoreAvg}</td>`
-      + `</tr>`;
-  }
-}
-// creando función que relaciona usuarios con progreso
-const addUserProgress = () => {
-  const courses = ['intro']
-  const users = JSON.parse(event.target.responseText);
-  //console.log(users);
-  const progress = () => {
-    const progress = JSON.parse(event.target.responseText);
-    const usersWithStats = computeUsersStats(users, progress, courses);
-    show(usersWithStats)
-    selectOrderDirection.addEventListener('change', (e)=>{
-  
-      console.log(selectOrderDirection.value);
-       
-      console.log( selectOrderBy.value);
-      //console.log(usersWithStats)
-      
-    const nuevoArray = sortUsers(usersWithStats, selectOrderBy.value, selectOrderDirection.value);
-    console.log(nuevoArray);
-    
-    contentDivStudents.innerHTML = '';
-    show(nuevoArray)
-     
-      
-    })
-    //console.log(sortUsers(usersWithStats, 'Nombre', 'ASC'))
-    //console.log(usersWithStats);
-    
-
-
- /* select.addEventListener('change', (event) =>{
-    console.log(event.target.value);
-    
- });  */}
-
-  getJSON(urlProgress, progress);
-  getJSON(urlCohorts, courses);
-}
-// AGREGANDO EVENTO AL SELECT PARA BORRAR SU CONTENIDO
-selectCohorts.addEventListener('change', event => {
-
-  if (selectCohorts.value == 'lim-2018-03-pre-core-pw') {
-    // console.log(usersWithStats, selectCohorts.value)
-    getJSON(urlUsers, addUserProgress);
-
-  } else {
-
-    document.getElementById('nodata').innerHTML = 'Disculpe no contamos con esta informacion en este momento'
-  }
-})
 //cuando el entorno gloal window cargue llamar a la siguiente funcion
 window.addEventListener('load', () => {
   //Filtersede espera evento change para ejecutar la funcion que tiene como parametro el evento 
@@ -180,13 +115,94 @@ window.addEventListener('load', () => {
   });
 
 
-})
+}) 
 
-const addCohorts = (event) => {
-  cohorts = JSON.parse(event.target.responseText);
-  const listCohort = cohorts.find(cohort => cohort.id === 'lim-2018-03-pre-core-pw'); //se busca el cohort con ese id
-  courses = Object.keys(listCohort.coursesIndex);
+//CREAMOS EL OBJETO OPTIONS PARA LA CUARTA FUNCION 
+//Objeto para crear funcion 4
+let options = {
 
-  computeUsersStats(users, progress, courses);
-  console.log(usersWithStats);
+  cohort: null,
+  cohortData: {
+    users: null,
+    progress: null
+  },
+
+  orderBy: 'name',
+  orderDirection: 'ASC',
+  search: ''
+
 }
+
+// creando función que relaciona usuarios con progreso y cohorts
+const addUserProgress = () => {
+  const addCohorts = () => {
+    const cohortList = JSON.parse(event.target.responseText);
+    options.cohort=cohortList
+
+  }
+
+  const users = JSON.parse(event.target.responseText);
+  options.cohortData.users = users;
+  const progress = () => {
+    const progressUsers = JSON.parse(event.target.responseText);
+    options.cohortData.progress = progressUsers;
+  }
+  getJSON(urlProgress, progress);
+  getJSON(urlCohorts, addCohorts);
+}
+getJSON(urlUsers, addUserProgress);
+
+//CREANDO UNA FUNCION EN DONDE ME IMPRIME LA LISTA DE USUARIOS 
+const show = (usersWithStats) => {
+  for (let i = 0; i < usersWithStats.length; i++) {
+    contentDivStudents.innerHTML += `<tr>` +
+      `<td>${usersWithStats[i].name}</td>
+       <td>${usersWithStats[i].stats.percent + '%'}</td>               
+       <td>${usersWithStats[i].stats.exercises.completed + ' de ' + usersWithStats[i].stats.exercises.total}</td>
+       <td>${usersWithStats[i].stats.reads.completed}</td> 
+       <td>${usersWithStats[i].stats.quizzes.completed}</td> 
+       <td>${usersWithStats[i].stats.quizzes.scoreAvg + '%'}</td>`
+      + `</tr>`;
+  }
+}
+
+// AGREGANDO EVENTO AL SELECT PARA BORRAR SU CONTENIDO
+selectCohorts.addEventListener('change', event => {
+  event.preventDefault();
+  if (selectCohorts.value === 'lim-2018-03-pre-core-pw') {
+    const cohort = options.cohort.find(cohort => cohort.id === event.target.value);
+    options.cohort=cohort;
+    const dataUsers = processCohortData(options);
+    show(dataUsers);
+
+  } else {
+
+    document.getElementById('nodata').innerHTML = 'Disculpe no contamos con esta informacion en este momento'
+  }
+});
+
+
+stringSearch.addEventListener('keyup',event=>{
+  event.preventDefault();
+//capturamos el valor que se ingresa en el stringsearch y lo guardamos en la variable 
+  let searchValue = stringSearch.value;
+  //asignamos el valor capturado para pasar al objeto oprions propiedad search
+  options.search=searchValue;
+
+  let filter = processCohortData(options);
+  //visualizo lo que se busca 
+ /// contentDivStudents.innerHTML='';
+  show(filter);
+  console.log(filter)
+
+});
+
+selectOrderDirection.addEventListener('click', (event) => {
+  event.preventDefault();
+  options.orderBy = selectOrderBy.value;
+  options.orderDirection = selectOrderDirection.value;
+  const userOrder = processCohortData(options);
+  contentDivStudents.innerHTML='';
+  show(userOrder);
+  console.log (userOrder)
+});

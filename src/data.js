@@ -53,19 +53,19 @@ window.computeUsersStats = (users, progress, courses) => {
 
             if (part.type === 'read') {
               lectures++;
-              if(part.completed === 1){
+              if (part.completed === 1) {
                 lecturesCompleted++;
-              }else{
+              } else {
                 lecturesCompleted = 0;
               }
             }
-            if (lectures !== 0){
+            if (lectures !== 0) {
 
-              lecturesPercent = Math.round((lecturesCompleted * 100) / lectures); 
-            } else{
-              lecturesPercent= 0;
+              lecturesPercent = Math.round((lecturesCompleted * 100) / lectures);
+            } else {
+              lecturesPercent = 0;
             }
-             
+
 
             if (part.type === 'quiz') { //type es la llave que hay en el objeto que estamos recorriendo
               quizzes++;
@@ -83,15 +83,15 @@ window.computeUsersStats = (users, progress, courses) => {
               if (part.hasOwnProperty('exercises')) {
                 const partExercise = Object.keys(part.exercises)
                 exercises = partExercise.length;
-                
+
                 const exerciseCompleted = Object.values(part.exercises)
                 exerciseCompleted.map(exercise => {
-                  if (exercise.completed !== undefined){
+                  if (exercise.completed !== undefined) {
                     exercisesCompleted += exercise.completed;
                   } else {
                     exercisesCompleted = 0;
                   }
-                  
+
                 })
               }
 
@@ -102,7 +102,7 @@ window.computeUsersStats = (users, progress, courses) => {
         } //aca termina el for que recorre las unidades
       }//aca termina el for que recorre los cursos
       // saca promedio
-      scoreAvg = quizzesCompleted !== 0 ?  Math.round(scoreSum / quizzesCompleted) : 0;
+      scoreAvg = quizzesCompleted !== 0 ? Math.round(scoreSum / quizzesCompleted) : 0;
 
       users[i].stats = {
         percent: percentGral,
@@ -129,12 +129,10 @@ window.computeUsersStats = (users, progress, courses) => {
   }
 
   return users;
-  console.log(users)
+
 }
 // funcion ordena la lista de usuarios creada con computeUsersStats en base a orderBy y OrderDirection
 window.sortUsers = (users, orderBy, orderDirection) => {
-console.log(users);
-
   const listOrder = users;
 
   if (orderBy === "name" && orderDirection === 'ASC') {
@@ -162,91 +160,157 @@ console.log(users);
     })
   }
 
-   if (orderBy === "percent" && orderDirection === 'ASC') {
-    return ListOrder.sort(function (a, b) {
-      return a.stats.percent - b.stats.percent;
+
+  if (orderBy === "percent" && orderDirection === 'ASC') {
+
+    return listOrder.sort(function (a, b) {
+      const percentA = a.stats.percent, percentB = b.stats.percent
+      if (percentA > percentB) {
+        return 1;
+      }
+      if (percentA < percentB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
+  // return a.stats.percent - b.stats.percent;
+
   if (orderBy === "percent" && orderDirection === 'DESC') {
-    return ListOrder.sort(function (a, b) {
-      return b.stats.percent - a.stats.percent  ;
+    return listOrder.sort(function (a, b) {
+      const percentB = b.stats.percent, percentA = a.stats.percent
+      if (percentA < percentB) {
+        return 1;
+      }
+      if (percentA > percentB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor 
     });
   }
 
   if (orderBy === "exercises" && orderDirection === 'ASC') {
-    ListOrder.sort(function (a, b) {
-      return a.stats.exercises.completed - b.stats.exerises.completed;
+    return listOrder.sort(function (a, b) {
+      const excercisesA = a.stats.exercises.completed, excercisesB = b.stats.exercises.completed
+      if (excercisesA > excercisesB) {
+        return 1;
+      }
+      if (excercisesA < excercisesB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
+
   if (orderBy === "exercises" && orderDirection === 'DESC') {
-    ListOrder.sort(function (a, b) {
-      return b.stats.exerises.completed - a.stats.exercises.completed;
+    return listOrder.sort(function (a, b) {
+      const excercisesB = b.stats.exercises.completed, excercisesA = a.stats.exercises.completed
+      if (excercisesA < excercisesB) {
+        return 1;
+      }
+      if (excercisesA > excercisesB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor 
     });
   }
 
   if (orderBy === "quizz" && orderDirection === 'ASC') {
-    ListOrder.sort(function (a, b) {
-      return a.stats.quizzes.completed - b.stats.quizzes.completed;
+    return listOrder.sort(function (a, b) {
+      const quizzA = a.stats.quizzes.completed, quizzB = b.stats.quizzes.completed
+      if (quizzA > quizzB) {
+        return 1;
+      }
+      if (quizzA < quizzB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
   if (orderBy === "quizz" && orderDirection === 'DESC') {
-    ListOrder.sort(function (a, b) {
-      return b.stats.quizzes.completed - a.stats.quizzes.completed;
+    return listOrder.sort(function (a, b) {
+      const quizzB = b.stats.quizzes.completed, quizzA = a.stats.quizzes.completed
+      if (quizzA < quizzB) {
+        return 1;
+      }
+      if (quizzA > quizzB) {
+        return -1;
+      }
+      return 0;
     });
   }
 
   if (orderBy === "quizzAvg" && orderDirection === 'ASC') {
-    ListOrder.sort(function (a, b) {
-      return a.stats.quizzes.scoreSum - b.stats.quizzes.scoreSum;
+    return listOrder.sort(function (a, b) {
+      const quizzA = a.stats.quizzes.completed, quizzB = b.stats.quizzes.completed
+      if (quizzA > quizzB) {
+        return 1;
+      }
+      if (quizzA < quizzB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
   if (orderBy === "quizzAvg" && orderDirection === 'DESC') {
-    ListOrder.sort(function (a, b) {
-      return b.stats.quizzes.scoreSum - a.stats.quizzes.scoreSum;
+    return listOrder.sort(function (a, b) {
+      const quizzB = b.stats.quizzes.completed, quizzA = a.stats.quizzes.completed
+      if (quizzA < quizzB) {
+        return 1;
+      }
+      if (quizzA > quizzB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
+
   }
 
   if (orderBy === "reads" && orderDirection === 'ASC') {
-    ListOrder.sort(function (a, b) {
-      return a.stats.reads.completed - b.stats.reads.completed;
+    return listOrder.sort(function (a, b) {
+      const quizzA = a.stats.reads.completed, quizzB = b.stats.reads.completed
+      if (quizzA > quizzB) {
+        return 1;
+      }
+      if (quizzA < quizzB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
+
   if (orderBy === "reads" && orderDirection === 'DESC') {
-    ListOrder.sort(function (a, b) {
-      return b.stats.reads.completed - a.stats.reads.completed;
+    return listOrder.sort(function (a, b) {
+      const readsB = b.stats.reads.completed, readsA = a.stats.reads.completed
+      if (readsA < readsB) {
+        return 1;
+      }
+      if (readsA > readsB) {
+        return -1;
+      }
+      return 0; //cuando no puede retornar un valor
     });
   }
-/*   if (orderDirection === "ASC") {
-    ListOrder = ListOrder.reverse();
-  } 
-
-  return ListOrder; */ //arreglo de usuarios ordenados
 }
 
+window.filterUsers = (users, search) => {
+  const filUsers = users.filter(user => {
+    return user.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
 
+  });
 
-const processCohortData = (options) => {
-  /* let users = options.cohortData.users;
-  // let cohort = options.cohort;
-  let progress = options.cohortData.progress;
-  let orderBy = options.orderBy;
-  let orderDirection = options.orderDirection;
-  let search = options.search;
-  let courses = options.cohort.coursesIndex;
- */
-  // console.log(courses);
-  /* let usersFiltered = filterUsers(users, search);
-  let usersWithStats = computeUsersStats(usersFiltered, progress, courses);
-  let ListOrderFiltered = sortUsers(usersWithStatus, orderBy, orderDirection);
-  return ListOrderFiltered;
-} */
+  return filUsers;
 
-/* window.filterUsers = filterUsers;
-window.computeUsersStats = computeUsersStats;
-window.sortUsers = sortUsers;
-window.processCohortData = processCohortData; */
 }
- 
 
+window.processCohortData = (options) => {
+  let courses = Object.keys(options.cohort.coursesIndex);
+  let totalStudents = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
 
+  totalStudents = sortUsers(totalStudents, options.orderBy, options.orderDirection);
 
+  if (options.search !== '') {
+    totalStudents = filterUsers(totalStudents, options.search);
+  }
+  return totalStudents;
+} 

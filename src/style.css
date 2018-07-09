@@ -1,5 +1,8 @@
+CSS
+
 body{
   margin: 0;
+  background-color: rgba(169, 169, 169, 0.582);
 }
 .barra-vertical{
   padding: 10px ;
@@ -41,6 +44,10 @@ border-radius:2px;
   padding: .8rem .3rem .8rem .5rem;
   border-radius:2px; 
 
+}
+.float {
+  float: right;
+  margin-right: 15%;
 }
 .float {
   float: right;
