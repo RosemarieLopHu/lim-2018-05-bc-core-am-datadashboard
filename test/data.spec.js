@@ -1,7 +1,7 @@
 describe('data', () => {
 
   it('debería exponer función computeUsersStats en objeto global', () => {
-    assert.isFunction(computeUsersStats);
+    console.log(assert.isFunction(computeUsersStats));
   });
 
   it('debería exponer función sortUsers en objeto global', () => {
@@ -74,7 +74,7 @@ describe('data', () => {
     });
 
   });
-/* 
+
   describe('sortUsers(users, orderBy, orderDirection)', () => {
 
     it('debería retornar arreglo de usuarios ordenado por nombre ASC');
@@ -103,5 +103,5 @@ describe('data', () => {
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
 
   });
- */
+
 });
