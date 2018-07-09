@@ -1,6 +1,30 @@
-.logo{
- position: center;
+CSS
+
+body{
+  margin: 0;
+  background-color: rgba(169, 169, 169, 0.582);
 }
+.barra-vertical{
+  padding: 10px ;
+  float: left;
+  box-sizing: border-box;
+  width: 20%;
+  background-color: #ffc107;
+ 
+  font-family: 'Bitter' serif;
+  margin-right: 10px;
+  width: 30%;
+  height: 100%;
+  
+}
+
+.logo{
+  position: center;
+  background-color: #fff;
+  height: 100px;
+  padding: 1em 2em ;
+}
+
 
 #filtersedes{
 
@@ -20,5 +44,8 @@ border-radius:2px;
   padding: .8rem .3rem .8rem .5rem;
   border-radius:2px; 
 
-
+}
+.float {
+  float: right;
+  margin-right: 15%;
 }
