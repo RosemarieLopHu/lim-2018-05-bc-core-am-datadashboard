@@ -126,7 +126,7 @@ El _boilerplate_  que ya contiene una estructura de archivos como punto de parti
 ![KPI's Estudiantes](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=32%3A49 "Progreso de Estudiantes")
 
 ## LOGIN
-<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://ibb.co/mALfXT" alt="1" border="0"></a>
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/jjiOmo/login.png" alt="1" border="0"></a>
 
 
 # MAPA
