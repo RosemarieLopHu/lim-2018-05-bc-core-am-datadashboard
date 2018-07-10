@@ -281,21 +281,9 @@ window.processCohortData = (options) => {
   }
   return totalStudents;
 }
-
-
-
-
-
-
-
-
-
-
-
   totalStudents = sortUsers(totalStudents, options.orderBy, options.orderDirection);
 
   if (options.search !== '') {
     totalStudents = filterUsers(totalStudents, options.search);
   }
   return totalStudents;
-} 
