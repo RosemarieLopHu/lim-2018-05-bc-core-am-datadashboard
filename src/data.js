@@ -16,11 +16,11 @@ window.computeUsersStats = (users, progress, courses) => {
     let scoreAvg = 0;
 
     // calculo de procentaje  de completitud
-    courses.forEach(coursesName => {
-      if (progress[user.id].hasOwnProperty(coursesName)) {
+    courses.forEach(coursesName => { //ejecuta la funcion una vez por cada elemento
+      if (progress[user.id].hasOwnProperty(coursesName)) { //evaluamos si el objeto tiene la propiedad buscada 
         percent = progress[user.id].intro.percent;
-        const usersUnits = progress[user.id].intro.units;
-        Object.keys(usersUnits).forEach((unitName) => {
+        const usersUnits = progress[user.id].intro.units;// entroa la propiedad units
+        Object.keys(usersUnits).forEach((unitName) => { //obtengo array con las  propiedades  enumeradas de mi objeto y evaluo por cada elemento
           const parts = usersUnits[unitName].parts
           Object.keys(parts).forEach((partName) => {
             const partsName = parts[partName];
