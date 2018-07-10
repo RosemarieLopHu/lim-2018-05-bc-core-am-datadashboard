@@ -1,4 +1,4 @@
-//declaro las constantes con su valor que en este caso son las url de los JSON que estan en el servidor 
+//Declaro las constantes con su valor que en este caso son las url de los JSON que estan en el servidor 
 const urlUsers = '../data/cohorts/lim-2018-03-pre-core-pw/users.json'; // data tipo array
 const urlCohorts = '../data/cohorts.json';//data tipo array
 const urlProgress = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';//data tipo objeto
@@ -29,7 +29,6 @@ const Error = () => {
   console.log('Ha ocurrido un error');
 }
 
-
 //creando función que me ayuda a cargar los cohorts de lima 
 const addCohortsLima = (event) => {
   let filterLima = '';
@@ -56,7 +55,6 @@ const addCohortsAqp = (event) => {
   }
   selectCohorts.innerHTML = filterAreq
 }
-
 
 //creando función que me ayuda a cargar los cohorts de Ciudad de santiagoChile  
 const addCohortsScl = (event) => {

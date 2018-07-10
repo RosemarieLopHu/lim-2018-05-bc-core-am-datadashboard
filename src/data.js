@@ -118,6 +118,9 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       }
       if (nameA > nameB) {
         return -1;
+
+
+
       }
       return 0; //cuando no puede retornar un valor
     })
@@ -278,15 +281,4 @@ window.processCohortData = (options) => {
   }
   return totalStudents;
 }
-
-
-
-
-
-
-
-
-
-
-
 
