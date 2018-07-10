@@ -1,10 +1,32 @@
 //creando primera funcion 
 window.computeUsersStats = (users, progress, courses) => {
+  //console.log(users);
+  /* //console.log(progress);
+  console.log(courses);
+
+const usersConProgress = courses.forEach(course => {//ejeuta la funcion una vez por cada elemento
+    users.map(users => {// me retorna un nuevo array de usuarios con sus progresos
+      if(progress[users.id].hasOwnProperty(course)){// seleciono propiedad del objeto que quiero
+        console.log(progress[users.id][course]);  
+      }
+      else {
+        console.log(progress[users.id][course]={
+          
+        });
+      }
+     })
+  });
+
+
+  let students = []; */
+
+
+
   for (let i = 0; i < users.length; i++) {
     let userId = users[i].id;
     let userProgress = progress[userId];
     if (JSON.stringify(userProgress) === '{}') {
-      users[i].stats = {
+      users[i].stats = {  
         percent: 0,
         exercises: { total: 0, completed: 0, percent: 0, },
         reads: { total: 0, completed: 0, percent: 0, },
@@ -128,7 +150,7 @@ window.computeUsersStats = (users, progress, courses) => {
     }
   }
 
-  return users;
+  return students;
 
 }
 // funcion ordena la lista de usuarios creada con computeUsersStats en base a orderBy y OrderDirection
@@ -155,6 +177,9 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       }
       if (nameA > nameB) {
         return -1;
+
+
+
       }
       return 0; //cuando no puede retornar un valor
     })
