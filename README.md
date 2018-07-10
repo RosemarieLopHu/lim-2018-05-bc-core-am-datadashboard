@@ -53,11 +53,12 @@ En esta parte del proyecto, ya con un resultado de data mostrandose en la pantal
 
 ![Cohort Chile](https://scontent.flim9-1.fna.fbcdn.net/v/t1.15752-9/36423279_1549167801860974_7296827601119608832_n.jpg?_nc_cat=0&oh=f953848a1cf89eb4a44ff9ca0585232d&oe=5BB2F0D2 "Chile")
 
-![General](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?node-id=51%3A1&scaling=scale-down "Dashboard de Prueba")
+### General
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/jL5VXT/General.png" alt="1" border="0"></a>
 
 Una vez logrado el objetivo principal, pintar en la pantalla la data de cohort empezamos a trabajar en la implementación de la primera función
 
-##*computeUsersStats(users, progress, courses)*
+## *computeUsersStats(users, progress, courses)*
 
 Esta función es la responsable de "crear" la lista de usuarios (estudiantes)
 que vamos a "pintar" en la pantalla. La idea es "recorrer" el arreglo de
@@ -70,7 +71,7 @@ estadísticas calculadas.
 
 Terminamos de realizar la primera funcion y comenzamos a codear para realizar las siguientes funciones a continuacion:
 
-##*sortUsers(users, orderBy, orderDirection)*
+## *sortUsers(users, orderBy, orderDirection)*
 
 La función `sortUsers()` se encarga de _ordenar_ la lista de usuarios creada con
 `computeUsersStats()` en base a `orderBy` y `orderDirection`.
@@ -118,19 +119,17 @@ El _boilerplate_  que ya contiene una estructura de archivos como punto de parti
     ├── headless.js
     └── index.html
 ```
-*Implementamos el prototipo de alta fidelidad, Diseño de la Interfaz de Usuario (UI), para ello se utilizó Figma, que es una herramienta de diseño visual el cual nos permite representar nuestro ideal de solución, obteniendo como resultado lo siguiente:
-
-![Ingreso Usuario](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0 "Login")
-![Selección](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A8 "Selección de Cohorts")
-![Filtrado](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=32%3A30 "Filtrado de Estudiantes")
-![KPI's Estudiantes](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=32%3A49 "Progreso de Estudiantes")
+* Implementamos el prototipo de alta fidelidad, Diseño de la Interfaz de Usuario (UI), para ello se utilizó Figma, que es una herramienta de diseño visual el cual nos permite representar nuestro ideal de solución, obteniendo como resultado lo siguiente:
 
 ## LOGIN
 <a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/jjiOmo/login.png" alt="1" border="0"></a>
 
+## MAPA
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/euNG6o/mapa.png" alt="1" border="0"></a>
 
-# MAPA
-# SELECT
-# KPI's
+## SELECT
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/ddzw6o/tabla.png" alt="1" border="0"></a>
 
+## KPI's
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/dpYOmo/kpi.png" alt="1" border="0"></a>
 
