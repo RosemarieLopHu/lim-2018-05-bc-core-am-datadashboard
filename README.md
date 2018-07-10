@@ -121,15 +121,15 @@ El _boilerplate_  que ya contiene una estructura de archivos como punto de parti
 ```
 * Implementamos el prototipo de alta fidelidad, Diseño de la Interfaz de Usuario (UI), para ello se utilizó Figma, que es una herramienta de diseño visual el cual nos permite representar nuestro ideal de solución, obteniendo como resultado lo siguiente:
 
-## LOGIN
+### LOGIN
 <a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/jjiOmo/login.png" alt="1" border="0"></a>
 
-## MAPA
+### SEDES
 <a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/euNG6o/mapa.png" alt="1" border="0"></a>
 
-## SELECT
+### SELECT
 <a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/ddzw6o/tabla.png" alt="1" border="0"></a>
 
-## KPI's
+### KPI's
 <a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0"> <img src= "https://image.ibb.co/dpYOmo/kpi.png" alt="1" border="0"></a>
 
