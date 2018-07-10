@@ -76,12 +76,12 @@ La función `sortUsers()` se encarga de _ordenar_ la lista de usuarios creada co
 `computeUsersStats()` en base a `orderBy` y `orderDirection`.
 
 
-##*filterUsers(users, search)*
+## *filterUsers(users, search)*
 
 * `users`: Arreglo de objetos creado con `computeUsersStats()`.
 * `search`: String de búsqueda.
 
-##*processCohortData(options)*
+## *processCohortData(options)*
 
 Esta función es la que deberíamos usar al seleccionar un cohort y cada vez que
 el usuario cambia los criterios de ordenado y filtrado en la interfaz. Esta
@@ -124,5 +124,12 @@ El _boilerplate_  que ya contiene una estructura de archivos como punto de parti
 ![Selección](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A8 "Selección de Cohorts")
 ![Filtrado](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=32%3A30 "Filtrado de Estudiantes")
 ![KPI's Estudiantes](https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=32%3A49 "Progreso de Estudiantes")
+
+# LOGIN
+<a href ="https://www.figma.com/proto/Q4oyzXOiifwqLM7cXZiYRGCZ/Untitled?scaling=scale-down&node-id=26%3A0" img = "https://ibb.co/mALfXT"></a>
+
+# MAPA
+# SELECT
+# KPI's
 
 

@@ -76,9 +76,17 @@ describe('data', () => {
   });
 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
-    
+    const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    const { users, progress } = fixtures;
+    const processed = computeUsersStats(users, progress, courses);
 
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC');
+    it('debería retornar arreglo de usuarios ordenado por nombre ASC', () => {
+      const ordensort = sortUsers(processed, "name", 'ASC')
+      ordensort.sort(function (a, b) => {})})
+
+     
+  
     it('debería retornar arreglo de usuarios ordenado por nombre DESC');
     it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
     it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
