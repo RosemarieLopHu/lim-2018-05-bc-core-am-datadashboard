@@ -191,9 +191,8 @@ stringSearch.addEventListener('keyup',event=>{
 
   let filter = processCohortData(options);
   //visualizo lo que se busca 
- /// contentDivStudents.innerHTML='';
+  contentDivStudents.innerHTML='';
   show(filter);
-  console.log(filter)
 
 });
 
@@ -204,5 +203,4 @@ selectOrderDirection.addEventListener('click', (event) => {
   const userOrder = processCohortData(options);
   contentDivStudents.innerHTML='';
   show(userOrder);
-  console.log (userOrder)
 });
