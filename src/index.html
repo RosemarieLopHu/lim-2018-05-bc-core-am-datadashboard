@@ -14,43 +14,30 @@
     <img src="http://laboratoria.la/images/homepage/logo_laboratoria.png" alt="" width="250px">
     <hr>
   </div>
-  <!-- Búsqueda -->
-      <div class="filter-container">
-          <form>
-            <input type="text" id="search-input" name="q" placeholder="Filtrar por nombre">
-          </form>
-        </div>
-
 </header>
 <hr>
 
 <body>
   <div class="loader"></div>
   <nav>
-    <select name="Lista" id="orderBy">
-      <option>-Order by-</option>
-      <option value="name">Nombre</option>
-      <option value="percent">Porcentaje completitud</option>
-      <option value="exercises">Ejercicios Completados</option>
-      <option value="reads">Lecturas</option>
-      <option value="quizz">Quizzes</option>
-      <option value="quizzAvg">Promedio Quizzes</option>
-    </select>
-    <select id="orderDirection" class="Direccion">
-      <option>Direction</option>
-      <option value="ASC">Ascendente</option>
-      <option value="DESC">Descendente</option>
-    </select>
-    <!-- <form action="#" method="get" class="sidebar-form">
+      <select name="Lista" id="orderBy">
+          <option>-Order by-</option>
+          <option value="name">Nombre</option>
+          <option value="percent">Porcentaje Completitud</option>
+          <option value="exercises">Ejercicios Completados</option>
+          <option value="reads">Lecturas Completadas</option>
+          <option value="quizz">Quizzes Completados</option>
+          <option value="quizzAvg">Promedio Quizzes</option>
+        </select>
+        <select id="orderDirection" class="Direccion">
+            <option value="ASC">Ascendente</option>
+            <option value="DESC">Descendente</option>
+        </select>
+        <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search..."> <!--CREAR UN EVENTO AL BUSCADOR-->
-    <!-- </div>
-          </form>  -->
-    <!-- <div class="filter-container">
-      <form>
-        <input type="text" id="search-input" name="q" placeholder="Filtrar por nombre">
-      </form>
-    </div> -->
+              <input type="text" name="" class="form-control" id="search" placeholder="Search..."> <!--CREAR UN EVENTE AL BUSCADOR-->
+            </div>
+        </form>
   </nav>
   <aside class="barra-vertical">
     <!--filter sites: filtro de sedes-->
@@ -70,23 +57,23 @@
         <option>Selecciona el Cohort</option>
       </select>
     </div>
-  </aside>
-  <section class="float">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Porcentaje de Completitud</th>
-          <th>Ejercicios</th>
-          <th>Quizzes</th>
-          <th>Lecturas</th>
-          <th>Promedio Quizzes</th>
-        </tr>
-      </thead>
-      <tbody id="contenedor"></tbody>
-    </table>
-  </section>
-
+    </aside>
+<section>
+<table class="table-responsive">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Porcentaje de Completitud</th>
+      <th>Ejercicios</th>
+      <th>Lecturas</th>
+      <th>Quizzes</th>
+      <th>Promedio Quizzes</th>
+    </tr>
+  </thead>
+  <tbody id="contenedor"></tbody>
+</table>
+</section>
+  
   <p id="nodata"></p>
   
   <script src="data.js"></script>
